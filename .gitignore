@@ -1,0 +1,7 @@
+
+#Ignorar
+#/nbproject/private/
+#/nbproject/
+#/dist/
+#/build/
+src/configuraciones/config_DB.cnf
