@@ -7,8 +7,11 @@
  */
 package envio_comprobantes_amdc;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +29,21 @@ public class LogIn extends javax.swing.JFrame {
      * Creates new form LogIn
      */
     public LogIn() {
+        //Visual_frame es el nombre del JFrame principal
+        LogIn.this.setUndecorated(true);
         initComponents();
+        //Con esto hacemos que el JFrame no se vea 
+        //Sino puedes quitarlo.
+        LogIn.this.setBackground(new Color(0, 0, 0, 0f));
+        //Con esto le damos tranparencia a los objetos que tiene el JFrame
+        //Tambien al JFrame, desde 0.0f a 1.0f 
+        LogIn.this.setOpacity(0.94f);
+
+        lblLogin.setBackground(new Color(0, 0, 0, 0.94f));
+        if (txtPass.getText().equals("Contraseña")) {
+            txtPass.setEchoChar((char) 0);
+        }
+
         btnLogIn.setToolTipText("Iniciar sesión.");
         btnSalir.setToolTipText("Salir de la aplicación.");
         txtUsu.setToolTipText("Ingrese el nombre de usuario.");
@@ -51,84 +68,96 @@ public class LogIn extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         btnLogIn = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         txtUsu = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
+        lblLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio de Sesión");
         setIconImage(getIconImage());
+        setPreferredSize(new java.awt.Dimension(623, 359));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Inicio de Sesión");
-
-        jLabel2.setText("Usuario");
-
-        jLabel3.setText("Contraseña");
-
-        btnLogIn.setText("Iniciar Sesión");
+        btnLogIn.setBackground(new java.awt.Color(49, 66, 82));
+        btnLogIn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnLogIn.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogIn.setText("Ingresar");
+        btnLogIn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnLogIn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogIn.setOpaque(false);
         btnLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogInActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLogIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 110, 40));
 
+        btnSalir.setBackground(new java.awt.Color(49, 66, 82));
+        btnSalir.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
         btnSalir.setText("Salir");
+        btnSalir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalir.setOpaque(false);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
             }
         });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 100, 40));
 
+        txtUsu.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        txtUsu.setForeground(new java.awt.Color(153, 153, 153));
+        txtUsu.setText("Usuario");
+        txtUsu.setBorder(null);
+        txtUsu.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtUsu.setOpaque(false);
+        txtUsu.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtUsuFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtUsuFocusLost(evt);
+            }
+        });
+        getContentPane().add(txtUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 230, 50));
+
+        txtPass.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        txtPass.setForeground(new java.awt.Color(153, 153, 153));
+        txtPass.setText("Contraseña");
         txtPass.setToolTipText("");
+        txtPass.setBorder(null);
+        txtPass.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtPass.setOpaque(false);
+        txtPass.setPreferredSize(new java.awt.Dimension(90, 35));
+        txtPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPassFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPassFocusLost(evt);
+            }
+        });
+        getContentPane().add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 240, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnLogIn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUsu)
-                            .addComponent(txtPass))))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogIn)
-                    .addComponent(btnSalir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+
+        lblLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Login_frm.png"))); // NOI18N
+        lblLogin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                lblLoginMouseDragged(evt);
+            }
+        });
+        lblLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblLoginMousePressed(evt);
+            }
+        });
+        getContentPane().add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 600, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -142,9 +171,18 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         String user = txtUsu.getText();
+        String passV = txtPass.getText();
         char passR[] = txtPass.getPassword();
+        
+        if(txtUsu.getText().equals("Usuario")){
+            user = "";
+        }
+        
+        if(passV.equals("Contraseña")){
+            passV = "";
+        }
 
-        if (user.length() == 0 || passR.length == 0) {
+        if (user.length() == 0 || passR.length == 0 || passV.length() == 0) {
             JOptionPane.showMessageDialog(null, "Credenciales para iniciar sesión incompletas", "ERROR",
                     JOptionPane.ERROR_MESSAGE);
         } else {
@@ -197,6 +235,56 @@ public class LogIn extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLogInActionPerformed
 
+    private void lblLoginMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoginMouseDragged
+        // TODO add your handling code here:
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - x, point.y - y);
+    }//GEN-LAST:event_lblLoginMouseDragged
+
+    private void lblLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoginMousePressed
+        // TODO add your handling code here:
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_lblLoginMousePressed
+
+    private void txtUsuFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsuFocusGained
+        // TODO add your handling code here:
+        String usu = txtUsu.getText().trim();
+        if (usu.equals("Usuario")) {
+            txtUsu.setText("");
+            txtUsu.setForeground(new java.awt.Color(255, 255, 255));
+        }
+    }//GEN-LAST:event_txtUsuFocusGained
+
+    private void txtUsuFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsuFocusLost
+        // TODO add your handling code here:
+        String usu = txtUsu.getText().trim();
+        if (usu.length() == 0) {
+            txtUsu.setText("Usuario");
+            txtUsu.setForeground(new java.awt.Color(153, 153, 153));
+        }
+    }//GEN-LAST:event_txtUsuFocusLost
+
+    private void txtPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassFocusGained
+        // TODO add your handling code here:
+        String pass = txtPass.getText().trim();
+        if (pass.equals("Contraseña")) {
+            txtPass.setText("");
+            txtPass.setEchoChar('*');
+            txtPass.setForeground(new java.awt.Color(255, 255, 255));
+        }
+    }//GEN-LAST:event_txtPassFocusGained
+
+    private void txtPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassFocusLost
+        // TODO add your handling code here:
+        String pass = txtPass.getText().trim();
+        if (pass.length() == 0) {
+            txtPass.setText("Contraseña");
+            txtPass.setForeground(new java.awt.Color(153, 153, 153));
+            txtPass.setEchoChar((char) 0);
+        }
+    }//GEN-LAST:event_txtPassFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -234,8 +322,8 @@ public class LogIn extends javax.swing.JFrame {
 
     public static void mostrarPantallaPrincipal() {
         Principal f = new Principal();
-        int w = 1109;//799;
-        int h = 668;//411;
+        int w = 1100;//799;
+        int h = 550;//411;
         f.setMinimumSize(new Dimension(w, h));
         f.setMaximumSize(new Dimension(w, h));
         f.setResizable(false);
@@ -258,9 +346,12 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JButton btnLogIn;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblLogin;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUsu;
     // End of variables declaration//GEN-END:variables
+
+    private int x;
+    private int y;
+
 }

@@ -83,9 +83,9 @@ public class Envio_Comprobantes_AMDC {
     }
 
     public static void mostrarLogIn() {
-        LogIn f = new LogIn();
-        int w = 400;
-        int h = 182;
+        LogIn f = new LogIn();//623, 359
+        int w = 623;
+        int h = 359;
         f.setMinimumSize(new Dimension(w, h));
         f.setMaximumSize(new Dimension(w, h));
         f.setResizable(false);

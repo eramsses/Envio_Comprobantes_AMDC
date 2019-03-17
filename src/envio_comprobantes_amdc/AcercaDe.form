@@ -35,8 +35,9 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="imgAcercaDe">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Imagenes/Acerca_de_v221.png"/>
+          <Image iconType="3" name="/Imagenes/Acerca_de_v321.png"/>
         </Property>
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>

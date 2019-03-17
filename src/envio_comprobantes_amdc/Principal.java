@@ -10,6 +10,8 @@ package envio_comprobantes_amdc;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -98,18 +100,16 @@ public class Principal extends javax.swing.JFrame {
         chkAcuerdo = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
         chkContratoPorHora = new javax.swing.JCheckBox();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
+        pnlEnvios = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtVoucher = new javax.swing.JTextPane();
         lblCorreosDisponibles = new javax.swing.JLabel();
         pbrEnviados = new javax.swing.JProgressBar();
         lblPorcentaje = new javax.swing.JLabel();
-        btnIniciarEnvio = new javax.swing.JButton();
-        lblCuentaAtras = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lblTiempoTrancurrido = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtVoucher = new javax.swing.JTextPane();
         jLabel9 = new javax.swing.JLabel();
         pbrEnviadosCH = new javax.swing.JProgressBar();
         jLabel10 = new javax.swing.JLabel();
@@ -117,24 +117,36 @@ public class Principal extends javax.swing.JFrame {
         lblCorreosDisponiblesCH = new javax.swing.JLabel();
         lblPorcentajeCH = new javax.swing.JLabel();
         lblPlanillasEncontradasCH = new javax.swing.JLabel();
-        lblEstado = new javax.swing.JLabel();
-        btnSalir = new javax.swing.JButton();
+        barraTitulo = new javax.swing.JPanel();
+        btnCerrar = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        pnlEstado = new javax.swing.JPanel();
         pbrEnviosCiclo = new javax.swing.JProgressBar();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        mnuConfiguracion = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        mnuAcercade = new javax.swing.JMenu();
-        mnuAcercaDe = new javax.swing.JMenuItem();
+        lblEstado = new javax.swing.JLabel();
+        mnuLateral = new javax.swing.JPanel();
+        btnMnuConfig = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        btnMnuSalir = new javax.swing.JLabel();
+        btnMnuInfo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        btnIniciarEnvio = new javax.swing.JButton();
+        lblCuentaAtras = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         setIconImage(getIconImage());
+        setUndecorated(true);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelCnf.setBorder(javax.swing.BorderFactory.createTitledBorder("Configuración de Envío"));
+        panelCnf.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configuración de Envío", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
+        panelCnf.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel2.setText("Año");
 
+        cmbAnio.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cmbAnio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbAnio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -142,13 +154,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        valMaxCorreos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         valMaxCorreos.setToolTipText("Máximo de comprobantes que se eniviarán antes de esperar.");
         valMaxCorreos.setValue(95);
 
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel3.setText("Máximo por Envío");
 
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel4.setText("Mes");
 
+        cmbMes.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cmbMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbMes.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -156,11 +172,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel6.setText("Tiempo de Espera Entre Envíos (mins)");
 
+        tiempoEspera.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         tiempoEspera.setToolTipText("Tiempo en minutos de espera entre cada envío de comprobantes.");
         tiempoEspera.setValue(70);
 
+        chkAcuerdo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         chkAcuerdo.setSelected(true);
         chkAcuerdo.setText("Acuerdo");
         chkAcuerdo.setToolTipText("Activar si desea enviar los comprobantes de empleados de acuerdo");
@@ -170,8 +189,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel8.setText("Enviar comprobantes de:");
 
+        chkContratoPorHora.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         chkContratoPorHora.setSelected(true);
         chkContratoPorHora.setText("Contrato por hora");
         chkContratoPorHora.setToolTipText("Activar si desea enviar los comprobantes de empleados de contrato por hora.");
@@ -204,14 +225,14 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelCnfLayout.createSequentialGroup()
                         .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(valMaxCorreos, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tiempoEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tiempoEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panelCnfLayout.setVerticalGroup(
@@ -225,32 +246,303 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(tiempoEspera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(tiempoEspera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelCnfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chkAcuerdo)
                     .addComponent(jLabel8)
                     .addComponent(chkContratoPorHora))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Envío Automático de Comprobantes de Pago A.M.D.C.");
+        getContentPane().add(panelCnf, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 900, 100));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Estado de los Envíos"));
+        lblTitulo.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("Envío Automático de Comprobantes de Pago A.M.D.C.");
+        getContentPane().add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 910, -1));
 
+        pnlEnvios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado de los Envíos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
+        pnlEnvios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel5.setText("Correos enviados de acuerdo");
+        pnlEnvios.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 27));
 
-        lblCorreosDisponibles.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jScrollPane2.setBackground(new java.awt.Color(204, 153, 0));
+
+        txtVoucher.setEditable(false);
+        txtVoucher.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        txtVoucher.setFocusable(false);
+        jScrollPane2.setViewportView(txtVoucher);
+
+        pnlEnvios.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 94, 870, 220));
+
+        lblCorreosDisponibles.setBackground(new java.awt.Color(255, 204, 255));
+        lblCorreosDisponibles.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblCorreosDisponibles.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pnlEnvios.add(lblCorreosDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 90, 27));
 
         pbrEnviados.setForeground(new java.awt.Color(0, 255, 51));
+        pnlEnvios.add(pbrEnviados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 193, 10));
 
+        lblPorcentaje.setBackground(new java.awt.Color(255, 204, 204));
+        lblPorcentaje.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblPorcentaje.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pnlEnvios.add(lblPorcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 60, 26));
 
-        btnIniciarEnvio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel7.setText("Tiempo transcurrido:");
+        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        pnlEnvios.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 23));
+
+        lblTiempoTrancurrido.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        lblTiempoTrancurrido.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblTiempoTrancurrido.setText("00:00:00");
+        lblTiempoTrancurrido.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        pnlEnvios.add(lblTiempoTrancurrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 110, -1));
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel9.setText("Correos enviados de contrato");
+        pnlEnvios.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
+
+        pbrEnviadosCH.setForeground(new java.awt.Color(0, 255, 51));
+        pnlEnvios.add(pbrEnviadosCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 193, 10));
+
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel10.setText("Tiempo transcurrido:");
+        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        pnlEnvios.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, 20));
+
+        lblTiempoTrancurridoCH.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        lblTiempoTrancurridoCH.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblTiempoTrancurridoCH.setText("00:00:00");
+        lblTiempoTrancurridoCH.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        pnlEnvios.add(lblTiempoTrancurridoCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 110, -1));
+
+        lblCorreosDisponiblesCH.setBackground(new java.awt.Color(255, 204, 255));
+        lblCorreosDisponiblesCH.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lblCorreosDisponiblesCH.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pnlEnvios.add(lblCorreosDisponiblesCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 27));
+
+        lblPorcentajeCH.setBackground(new java.awt.Color(255, 204, 204));
+        lblPorcentajeCH.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblPorcentajeCH.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pnlEnvios.add(lblPorcentajeCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 60, 26));
+
+        lblPlanillasEncontradasCH.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lblPlanillasEncontradasCH.setText("Planillas encontradas");
+        pnlEnvios.add(lblPlanillasEncontradasCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 179, -1));
+
+        getContentPane().add(pnlEnvios, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 900, 330));
+
+        barraTitulo.setBackground(new java.awt.Color(0, 118, 140));
+        barraTitulo.setMaximumSize(new java.awt.Dimension(1100, 48));
+        barraTitulo.setMinimumSize(new java.awt.Dimension(1100, 48));
+        barraTitulo.setPreferredSize(new java.awt.Dimension(1100, 48));
+        barraTitulo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                barraTituloMouseDragged(evt);
+            }
+        });
+        barraTitulo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                barraTituloMousePressed(evt);
+            }
+        });
+
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cerrar.png"))); // NOI18N
+        btnCerrar.setToolTipText("Salir del sistema");
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCerrarMouseClicked(evt);
+            }
+        });
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/minimazar.png"))); // NOI18N
+        jLabel11.setToolTipText("Minimizar");
+        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo_Vouchers.png"))); // NOI18N
+        jLabel12.setText("V@UCHERS");
+
+        javax.swing.GroupLayout barraTituloLayout = new javax.swing.GroupLayout(barraTitulo);
+        barraTitulo.setLayout(barraTituloLayout);
+        barraTituloLayout.setHorizontalGroup(
+            barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraTituloLayout.createSequentialGroup()
+                .addContainerGap(431, Short.MAX_VALUE)
+                .addComponent(jLabel12)
+                .addGap(380, 380, 380)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCerrar)
+                .addContainerGap())
+        );
+        barraTituloLayout.setVerticalGroup(
+            barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barraTituloLayout.createSequentialGroup()
+                .addGroup(barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(barraTituloLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(btnCerrar))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(barraTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1109, -1));
+
+        pnlEstado.setBackground(new java.awt.Color(0, 118, 140));
+        pnlEstado.setForeground(new java.awt.Color(204, 204, 204));
+
+        pbrEnviosCiclo.setBackground(new java.awt.Color(0, 118, 140));
+        pbrEnviosCiclo.setForeground(new java.awt.Color(255, 102, 0));
+        pbrEnviosCiclo.setFocusable(false);
+        pbrEnviosCiclo.setMaximumSize(new java.awt.Dimension(1082, 6));
+        pbrEnviosCiclo.setMinimumSize(new java.awt.Dimension(1082, 6));
+        pbrEnviosCiclo.setPreferredSize(new java.awt.Dimension(1050, 6));
+
+        lblEstado.setBackground(new java.awt.Color(255, 255, 255));
+        lblEstado.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblEstado.setForeground(new java.awt.Color(255, 255, 255));
+        lblEstado.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        javax.swing.GroupLayout pnlEstadoLayout = new javax.swing.GroupLayout(pnlEstado);
+        pnlEstado.setLayout(pnlEstadoLayout);
+        pnlEstadoLayout.setHorizontalGroup(
+            pnlEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEstadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pbrEnviosCiclo, javax.swing.GroupLayout.DEFAULT_SIZE, 1082, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        pnlEstadoLayout.setVerticalGroup(
+            pnlEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEstadoLayout.createSequentialGroup()
+                .addComponent(pbrEnviosCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(pnlEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 1110, 50));
+
+        mnuLateral.setBackground(new java.awt.Color(49, 66, 82));
+        mnuLateral.setMaximumSize(new java.awt.Dimension(190, 620));
+        mnuLateral.setMinimumSize(new java.awt.Dimension(190, 620));
+        mnuLateral.setPreferredSize(new java.awt.Dimension(190, 620));
+
+        btnMnuConfig.setBackground(new java.awt.Color(49, 66, 82));
+        btnMnuConfig.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnMnuConfig.setForeground(new java.awt.Color(204, 204, 204));
+        btnMnuConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/img_conf.png"))); // NOI18N
+        btnMnuConfig.setText("Configuración");
+        btnMnuConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMnuConfig.setOpaque(true);
+        btnMnuConfig.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMnuConfigMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMnuConfigMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMnuConfigMouseExited(evt);
+            }
+        });
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logoAMDC3_3.5.png"))); // NOI18N
+
+        btnMnuSalir.setBackground(new java.awt.Color(49, 66, 82));
+        btnMnuSalir.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnMnuSalir.setForeground(new java.awt.Color(204, 204, 204));
+        btnMnuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/apagar.png"))); // NOI18N
+        btnMnuSalir.setText("Salir");
+        btnMnuSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMnuSalir.setOpaque(true);
+        btnMnuSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMnuSalirMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMnuSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMnuSalirMouseExited(evt);
+            }
+        });
+
+        btnMnuInfo.setBackground(new java.awt.Color(49, 66, 82));
+        btnMnuInfo.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnMnuInfo.setForeground(new java.awt.Color(204, 204, 204));
+        btnMnuInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Icono-info.png"))); // NOI18N
+        btnMnuInfo.setText("Acerca de...");
+        btnMnuInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMnuInfo.setOpaque(true);
+        btnMnuInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMnuInfoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMnuInfoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMnuInfoMouseExited(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo_Vouchers.png"))); // NOI18N
+
+        javax.swing.GroupLayout mnuLateralLayout = new javax.swing.GroupLayout(mnuLateral);
+        mnuLateral.setLayout(mnuLateralLayout);
+        mnuLateralLayout.setHorizontalGroup(
+            mnuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnMnuConfig, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+            .addComponent(btnMnuSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnMnuInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(mnuLateralLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        mnuLateralLayout.setVerticalGroup(
+            mnuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mnuLateralLayout.createSequentialGroup()
+                .addGroup(mnuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mnuLateralLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel1))
+                    .addGroup(mnuLateralLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel13)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
+                .addComponent(btnMnuConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMnuInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMnuSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(mnuLateral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, 580));
+
+        btnIniciarEnvio.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         btnIniciarEnvio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/envio_comprobantes_amdc/green-mail-send-icon.png"))); // NOI18N
         btnIniciarEnvio.setText("Iniciar Envío");
         btnIniciarEnvio.addActionListener(new java.awt.event.ActionListener() {
@@ -258,249 +550,18 @@ public class Principal extends javax.swing.JFrame {
                 btnIniciarEnvioActionPerformed(evt);
             }
         });
+        getContentPane().add(btnIniciarEnvio, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 560, -1, 40));
+
+        lblContinuara.setBackground(new java.awt.Color(255, 204, 255));
+        lblContinuara.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblContinuara.setForeground(new java.awt.Color(0, 51, 255));
+        lblContinuara.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        getContentPane().add(lblContinuara, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 570, 138, 40));
 
         lblCuentaAtras.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblCuentaAtras.setForeground(new java.awt.Color(0, 51, 255));
-        lblCuentaAtras.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblCuentaAtras.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        lblContinuara.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblContinuara.setForeground(new java.awt.Color(0, 51, 255));
-        lblContinuara.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblContinuara.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        jLabel7.setText("Tiempo transcurrido:");
-        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        lblTiempoTrancurrido.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblTiempoTrancurrido.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblTiempoTrancurrido.setText("00:00:00");
-        lblTiempoTrancurrido.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        txtVoucher.setEditable(false);
-        txtVoucher.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
-        txtVoucher.setFocusable(false);
-        jScrollPane2.setViewportView(txtVoucher);
-
-        jLabel9.setText("Correos enviados de contrato");
-
-        pbrEnviadosCH.setForeground(new java.awt.Color(0, 255, 51));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        jLabel10.setText("Tiempo transcurrido:");
-        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        lblTiempoTrancurridoCH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblTiempoTrancurridoCH.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblTiempoTrancurridoCH.setText("00:00:00");
-        lblTiempoTrancurridoCH.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        lblCorreosDisponiblesCH.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblCorreosDisponiblesCH.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-
-        lblPorcentajeCH.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-
-        lblPlanillasEncontradasCH.setText("Planillas encontradas");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblTiempoTrancurrido, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(pbrEnviados, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblCorreosDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblTiempoTrancurridoCH, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(pbrEnviadosCH, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPorcentajeCH, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblCorreosDisponiblesCH, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblPlanillasEncontradasCH, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnIniciarEnvio, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblContinuara, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblCuentaAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(pbrEnviados, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lblTiempoTrancurrido)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lblCorreosDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblCuentaAtras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblContinuara, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addComponent(btnIniciarEnvio))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblPorcentajeCH, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblCorreosDisponiblesCH, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(23, 23, 23))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(lblPlanillasEncontradasCH))
-                                .addGap(57, 57, 57))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(pbrEnviadosCH, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblTiempoTrancurridoCH))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        lblEstado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblEstado.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        btnSalir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/envio_comprobantes_amdc/salir-de-mi-perfil-icono-3964-32.png"))); // NOI18N
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-
-        pbrEnviosCiclo.setForeground(new java.awt.Color(255, 102, 0));
-        pbrEnviosCiclo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        mnuConfiguracion.setText("Archivo");
-        mnuConfiguracion.setToolTipText("");
-        mnuConfiguracion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuConfiguracionActionPerformed(evt);
-            }
-        });
-
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/configuration_config_system_1540.png"))); // NOI18N
-        jMenuItem1.setText("Configuración");
-        jMenuItem1.setActionCommand("Configuracion");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        mnuConfiguracion.add(jMenuItem1);
-        mnuConfiguracion.add(jSeparator1);
-
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/envio_comprobantes_amdc/salir-de-mi-perfil-icono-3964-32.png"))); // NOI18N
-        jMenuItem2.setText("Salir");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        mnuConfiguracion.add(jMenuItem2);
-
-        jMenuBar1.add(mnuConfiguracion);
-
-        mnuAcercade.setText("Acerca de...");
-        mnuAcercade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAcercadeActionPerformed(evt);
-            }
-        });
-
-        mnuAcercaDe.setText("Acerca de ...");
-        mnuAcercaDe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAcercaDeActionPerformed(evt);
-            }
-        });
-        mnuAcercade.add(mnuAcercaDe);
-
-        jMenuBar1.add(mnuAcercade);
-
-        setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelCnf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pbrEnviosCiclo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(panelCnf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSalir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pbrEnviosCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        lblCuentaAtras.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        getContentPane().add(lblCuentaAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 580, 100, 26));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -530,11 +591,6 @@ public class Principal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_cmbMesItemStateChanged
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
-        this.salir();
-    }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnIniciarEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarEnvioActionPerformed
         // TODO add your handling code here:
@@ -582,30 +638,72 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chkContratoPorHoraItemStateChanged
 
-    private void mnuAcercadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAcercadeActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_mnuAcercadeActionPerformed
-
-    private void mnuConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConfiguracionActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_mnuConfiguracionActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        mostrarConfiguracion();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void mnuAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAcercaDeActionPerformed
-        // TODO add your handling code here:
-        mostrarAcercaDe();
-    }//GEN-LAST:event_mnuAcercaDeActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseClicked
         // TODO add your handling code here:
         salir();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_btnCerrarMouseClicked
+
+    private void barraTituloMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barraTituloMouseDragged
+        // TODO add your handling code here:
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - xf, point.y - yf);
+    }//GEN-LAST:event_barraTituloMouseDragged
+
+    private void barraTituloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barraTituloMousePressed
+        // TODO add your handling code here:
+        xf = evt.getX();
+        yf = evt.getY();
+    }//GEN-LAST:event_barraTituloMousePressed
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        // TODO add your handling code here:
+        this.setExtendedState(Principal.ICONIFIED);
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void btnMnuConfigMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuConfigMouseEntered
+        // TODO add your handling code here:
+        btnMnuConfig.setBackground(new java.awt.Color(0, 118, 140));
+    }//GEN-LAST:event_btnMnuConfigMouseEntered
+
+    private void btnMnuConfigMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuConfigMouseExited
+        // TODO add your handling code here:
+        btnMnuConfig.setBackground(new java.awt.Color(49,66,82));
+    }//GEN-LAST:event_btnMnuConfigMouseExited
+
+    private void btnMnuSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuSalirMouseEntered
+        // TODO add your handling code here:
+        btnMnuSalir.setBackground(new java.awt.Color(0, 118, 140));
+    }//GEN-LAST:event_btnMnuSalirMouseEntered
+
+    private void btnMnuSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuSalirMouseExited
+        // TODO add your handling code here:
+        btnMnuSalir.setBackground(new java.awt.Color(49,66,82));
+    }//GEN-LAST:event_btnMnuSalirMouseExited
+
+    private void btnMnuInfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuInfoMouseEntered
+        // TODO add your handling code here:
+        btnMnuInfo.setBackground(new java.awt.Color(0, 118, 140));
+    }//GEN-LAST:event_btnMnuInfoMouseEntered
+
+    private void btnMnuInfoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuInfoMouseExited
+        // TODO add your handling code here:
+        btnMnuInfo.setBackground(new java.awt.Color(49,66,82));
+    }//GEN-LAST:event_btnMnuInfoMouseExited
+
+    private void btnMnuSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuSalirMouseClicked
+        // TODO add your handling code here:
+        salir();
+    }//GEN-LAST:event_btnMnuSalirMouseClicked
+
+    private void btnMnuInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuInfoMouseClicked
+        // TODO add your handling code here:
+        mostrarAcercaDe();
+    }//GEN-LAST:event_btnMnuInfoMouseClicked
+
+    private void btnMnuConfigMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuConfigMouseClicked
+        // TODO add your handling code here:
+        mostrarConfiguracion();
+    }//GEN-LAST:event_btnMnuConfigMouseClicked
 
     /**
      * @param args the command line arguments
@@ -710,8 +808,12 @@ public class Principal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel barraTitulo;
+    private javax.swing.JLabel btnCerrar;
     public static javax.swing.JButton btnIniciarEnvio;
-    private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel btnMnuConfig;
+    private javax.swing.JLabel btnMnuInfo;
+    private javax.swing.JLabel btnMnuSalir;
     private javax.swing.ButtonGroup buttonGroup1;
     public static javax.swing.JCheckBox chkAcuerdo;
     public static javax.swing.JCheckBox chkContratoPorHora;
@@ -719,6 +821,9 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> cmbMes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -727,12 +832,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
     public static final javax.swing.JLabel lblContinuara = new javax.swing.JLabel();
     public static javax.swing.JLabel lblCorreosDisponibles;
     public static javax.swing.JLabel lblCorreosDisponiblesCH;
@@ -743,13 +843,14 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JLabel lblPorcentajeCH;
     public static javax.swing.JLabel lblTiempoTrancurrido;
     public static javax.swing.JLabel lblTiempoTrancurridoCH;
-    private javax.swing.JMenuItem mnuAcercaDe;
-    private javax.swing.JMenu mnuAcercade;
-    private javax.swing.JMenu mnuConfiguracion;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel mnuLateral;
     private javax.swing.JPanel panelCnf;
     public static javax.swing.JProgressBar pbrEnviados;
     public static javax.swing.JProgressBar pbrEnviadosCH;
     public static javax.swing.JProgressBar pbrEnviosCiclo;
+    private javax.swing.JPanel pnlEnvios;
+    private javax.swing.JPanel pnlEstado;
     public static javax.swing.JSpinner tiempoEspera;
     public static javax.swing.JTextPane txtVoucher;
     public static javax.swing.JSpinner valMaxCorreos;
@@ -758,6 +859,9 @@ public class Principal extends javax.swing.JFrame {
     public static boolean cargado = false;
     static Thread hiloProcesos = null;
     public static ThreadProcesos P = null;
+    
+    private int xf;
+    private int yf;
 
     public static boolean enviando = false;
 }

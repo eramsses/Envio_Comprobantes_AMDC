@@ -47,7 +47,8 @@ public class AcercaDe extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        imgAcercaDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Acerca_de_v221.png"))); // NOI18N
+        imgAcercaDe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        imgAcercaDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Acerca_de_v321.png"))); // NOI18N
         imgAcercaDe.setOpaque(true);
         imgAcercaDe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

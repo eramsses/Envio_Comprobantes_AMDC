@@ -362,7 +362,7 @@ public class ThreadProcesos extends Thread {
             mesFull = "0" + mes;
         }
 
-        Principal.lblEstado.setForeground(Color.BLACK);
+        Principal.lblEstado.setForeground(Color.WHITE);
         String anio = cmbAnio.getSelectedItem().toString();
         String mesSel = Principal.cmbMes.getSelectedItem().toString();
 
@@ -927,7 +927,7 @@ public class ThreadProcesos extends Thread {
             Principal.enviando = false;
 
             tiempoTranscurridoActivo = false;
-            Principal.lblEstado.setForeground(Color.BLUE);
+            Principal.lblEstado.setForeground(Color.GREEN);
             Principal.lblEstado.setText("Envío finalizado exitosamente!!!");
             db.cierraConexion();
         }
@@ -942,7 +942,7 @@ public class ThreadProcesos extends Thread {
             mesFull = "0" + mes;
         }
 
-        Principal.lblEstado.setForeground(Color.BLACK);
+        Principal.lblEstado.setForeground(Color.WHITE);
         String anio = cmbAnio.getSelectedItem().toString();
         String mesSel = Principal.cmbMes.getSelectedItem().toString();
 
@@ -1428,7 +1428,7 @@ public class ThreadProcesos extends Thread {
             Principal.enviando = false;
 
             tiempoTranscurridoActivoCH = false;
-            Principal.lblEstado.setForeground(Color.BLUE);
+            Principal.lblEstado.setForeground(Color.GREEN);
             Principal.lblEstado.setText("Envío finalizado exitosamente!!!");
         db.cierraConexion();
     }

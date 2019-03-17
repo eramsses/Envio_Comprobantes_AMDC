@@ -69,12 +69,13 @@ public class Splash extends javax.swing.JFrame {
 
         pBar_inicio.setForeground(new java.awt.Color(255, 153, 0));
         pBar_inicio.setValue(10);
+        pBar_inicio.setBorderPainted(false);
         getContentPane().add(pBar_inicio);
-        pBar_inicio.setBounds(40, 330, 380, 14);
+        pBar_inicio.setBounds(80, 330, 380, 10);
 
         lblImgSplash.setBackground(new java.awt.Color(102, 102, 102));
-        lblImgSplash.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblImgSplash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Splash_Vouchers_hex_v221.png"))); // NOI18N
+        lblImgSplash.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblImgSplash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Splash_Vouchers_hex_v321.png"))); // NOI18N
         lblImgSplash.setOpaque(true);
         lblImgSplash.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -82,7 +83,7 @@ public class Splash extends javax.swing.JFrame {
             }
         });
         getContentPane().add(lblImgSplash);
-        lblImgSplash.setBounds(0, 0, 460, 433);
+        lblImgSplash.setBounds(0, 0, 540, 433);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
