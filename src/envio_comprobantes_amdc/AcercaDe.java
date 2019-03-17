@@ -30,8 +30,9 @@ public class AcercaDe extends javax.swing.JFrame {
         AcercaDe.this.setBackground(new Color(0,0,0,0));
         //Con esto le damos tranparencia a los objetos que tiene el JFrame
         //Tambien al JFrame, desde 0.0f a 1.0f 
-        AcercaDe.this.setOpacity(0.94f);
+        AcercaDe.this.setOpacity(0.96f);
 
+        imgAcercaDe.setBackground(new Color(0, 0, 0, 0f));
     }
 
     /**
@@ -47,8 +48,9 @@ public class AcercaDe extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        imgAcercaDe.setBackground(new java.awt.Color(102, 102, 102));
         imgAcercaDe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        imgAcercaDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Acerca_de_v321.png"))); // NOI18N
+        imgAcercaDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Acerca_de_v321_sobre2.png"))); // NOI18N
         imgAcercaDe.setOpaque(true);
         imgAcercaDe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

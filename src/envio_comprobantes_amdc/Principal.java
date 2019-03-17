@@ -777,8 +777,8 @@ public class Principal extends javax.swing.JFrame {
     
     public void mostrarAcercaDe() {
         AcercaDe f = new AcercaDe(this);
-        int w = 452;
-        int h = 214;
+        int w = 413;
+        int h = 398;
         f.setMinimumSize(new Dimension(w, h));
         f.setMaximumSize(new Dimension(w, h));
         f.setResizable(false);
