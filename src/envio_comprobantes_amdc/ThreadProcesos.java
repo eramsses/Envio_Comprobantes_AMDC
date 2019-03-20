@@ -251,6 +251,10 @@ public class ThreadProcesos extends Thread {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        if (Integer.parseInt(correosEnviados) > filas) {
+            correosEnviados = "" + filas;
+        }
+
         double cEnviados = Double.parseDouble(correosEnviados);
 
         Principal.pbrEnviados.setValue((int) cEnviados);
@@ -329,6 +333,9 @@ public class ThreadProcesos extends Thread {
         Principal.lblPlanillasEncontradasCH.setText("Planillas encontradas " + planillas);
 
         if (planillas > 0) {
+            if(contratosCorreoEnviados > contratosCorreosDisponibles){
+                contratosCorreoEnviados = contratosCorreosDisponibles;
+            }
             Principal.pbrEnviadosCH.setMaximum(contratosCorreosDisponibles);
 
             Principal.pbrEnviadosCH.setValue((int) contratosCorreoEnviados);
@@ -1417,19 +1424,19 @@ public class ThreadProcesos extends Thread {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-            //habilitar controles de configuración de envío
-            Principal.cmbAnio.setEnabled(true);
-            Principal.cmbMes.setEnabled(true);
-            Principal.valMaxCorreos.setEnabled(true);
-            Principal.tiempoEspera.setEnabled(true);
-            Principal.btnIniciarEnvio.setEnabled(true);
-            Principal.chkAcuerdo.setEnabled(true);
-            Principal.chkContratoPorHora.setEnabled(true);
-            Principal.enviando = false;
+        //habilitar controles de configuración de envío
+        Principal.cmbAnio.setEnabled(true);
+        Principal.cmbMes.setEnabled(true);
+        Principal.valMaxCorreos.setEnabled(true);
+        Principal.tiempoEspera.setEnabled(true);
+        Principal.btnIniciarEnvio.setEnabled(true);
+        Principal.chkAcuerdo.setEnabled(true);
+        Principal.chkContratoPorHora.setEnabled(true);
+        Principal.enviando = false;
 
-            tiempoTranscurridoActivoCH = false;
-            Principal.lblEstado.setForeground(Color.GREEN);
-            Principal.lblEstado.setText("Envío finalizado exitosamente!!!");
+        tiempoTranscurridoActivoCH = false;
+        Principal.lblEstado.setForeground(Color.GREEN);
+        Principal.lblEstado.setText("Envío finalizado exitosamente!!!");
         db.cierraConexion();
     }
 

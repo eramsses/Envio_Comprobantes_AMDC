@@ -8,6 +8,7 @@
 package envio_comprobantes_amdc;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.MouseInfo;
@@ -15,12 +16,21 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SpinnerNumberModel;
 
 /**
@@ -49,6 +59,10 @@ public class Principal extends javax.swing.JFrame {
 
         valMaxCorreos.setModel(nm1);
         tiempoEspera.setModel(nm2);
+
+        ocultarPanelesCnf();
+        mostrarPanelActivo(pnlEnvios);
+        activarLuz();
 
         this.addWindowListener(new WindowAdapter() {
 
@@ -88,7 +102,29 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        panelCnf = new javax.swing.JPanel();
+        barraTitulo = new javax.swing.JPanel();
+        btnCerrar = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        btnContraer = new javax.swing.JLabel();
+        pnlEstado = new javax.swing.JPanel();
+        pbrEnviosCiclo = new javax.swing.JProgressBar();
+        lblEstado = new javax.swing.JLabel();
+        mnuLateral = new javax.swing.JPanel();
+        luzEnvio = new javax.swing.JPanel();
+        luzConfig = new javax.swing.JPanel();
+        luzInfo = new javax.swing.JPanel();
+        btnMnuConfig = new javax.swing.JLabel();
+        btnMnuSalir = new javax.swing.JLabel();
+        btnMnuInfo = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
+        btnMnuEnviar = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        pnlContenedor = new javax.swing.JPanel();
+        pnlEnvios = new javax.swing.JPanel();
+        lblCuentaAtras = new javax.swing.JLabel();
+        grupoCnfEnvio = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         cmbAnio = new javax.swing.JComboBox<>();
         valMaxCorreos = new javax.swing.JSpinner();
@@ -101,7 +137,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         chkContratoPorHora = new javax.swing.JCheckBox();
         lblTitulo = new javax.swing.JLabel();
-        pnlEnvios = new javax.swing.JPanel();
+        grupoEnvios = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtVoucher = new javax.swing.JTextPane();
@@ -117,225 +153,54 @@ public class Principal extends javax.swing.JFrame {
         lblCorreosDisponiblesCH = new javax.swing.JLabel();
         lblPorcentajeCH = new javax.swing.JLabel();
         lblPlanillasEncontradasCH = new javax.swing.JLabel();
-        barraTitulo = new javax.swing.JPanel();
-        btnCerrar = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        pnlEstado = new javax.swing.JPanel();
-        pbrEnviosCiclo = new javax.swing.JProgressBar();
-        lblEstado = new javax.swing.JLabel();
-        mnuLateral = new javax.swing.JPanel();
-        btnMnuConfig = new javax.swing.JLabel();
+        btnIniciarEnvio = new javax.swing.JLabel();
+        pnlAcercaDe = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        btnMnuSalir = new javax.swing.JLabel();
-        btnMnuInfo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        btnIniciarEnvio = new javax.swing.JButton();
-        lblCuentaAtras = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        pnlConfiguracion = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        pnlCnf_DB = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        txtURL = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        txtPuerto = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txtBaseDatos = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        txtUsuarioDB = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        txtPassDB = new javax.swing.JPasswordField();
+        jLabel25 = new javax.swing.JLabel();
+        btnProbarDB = new javax.swing.JLabel();
+        pnlCnf_barraMenu = new javax.swing.JPanel();
+        btnCnf_logos = new javax.swing.JLabel();
+        btnCnf_DB = new javax.swing.JLabel();
+        btnCnf_correos = new javax.swing.JLabel();
+        luzCnf_logos = new javax.swing.JPanel();
+        luzCnf_DB = new javax.swing.JPanel();
+        luzCnf_correos = new javax.swing.JPanel();
+        pnlCnf_logos = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        txtUrlLogoIzq = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        txtUrlLogoDer = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTxtPane_logos = new javax.swing.JTextPane();
+        jLabel23 = new javax.swing.JLabel();
+        btnRecargarConfigInterna = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        pnlCnf_correo = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        btnGuardarConfiguracion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         setIconImage(getIconImage());
+        setMaximumSize(new java.awt.Dimension(1100, 660));
+        setMinimumSize(new java.awt.Dimension(960, 660));
         setUndecorated(true);
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelCnf.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configuración de Envío", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
-        panelCnf.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel2.setText("Año");
-
-        cmbAnio.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        cmbAnio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbAnio.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbAnioItemStateChanged(evt);
-            }
-        });
-
-        valMaxCorreos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        valMaxCorreos.setToolTipText("Máximo de comprobantes que se eniviarán antes de esperar.");
-        valMaxCorreos.setValue(95);
-
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel3.setText("Máximo por Envío");
-
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel4.setText("Mes");
-
-        cmbMes.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        cmbMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbMes.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbMesItemStateChanged(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel6.setText("Tiempo de Espera Entre Envíos (mins)");
-
-        tiempoEspera.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        tiempoEspera.setToolTipText("Tiempo en minutos de espera entre cada envío de comprobantes.");
-        tiempoEspera.setValue(70);
-
-        chkAcuerdo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        chkAcuerdo.setSelected(true);
-        chkAcuerdo.setText("Acuerdo");
-        chkAcuerdo.setToolTipText("Activar si desea enviar los comprobantes de empleados de acuerdo");
-        chkAcuerdo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chkAcuerdoItemStateChanged(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel8.setText("Enviar comprobantes de:");
-
-        chkContratoPorHora.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        chkContratoPorHora.setSelected(true);
-        chkContratoPorHora.setText("Contrato por hora");
-        chkContratoPorHora.setToolTipText("Activar si desea enviar los comprobantes de empleados de contrato por hora.");
-        chkContratoPorHora.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chkContratoPorHoraItemStateChanged(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelCnfLayout = new javax.swing.GroupLayout(panelCnf);
-        panelCnf.setLayout(panelCnfLayout);
-        panelCnfLayout.setHorizontalGroup(
-            panelCnfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCnfLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelCnfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCnfLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmbAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4))
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelCnfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCnfLayout.createSequentialGroup()
-                        .addComponent(chkAcuerdo)
-                        .addGap(18, 18, 18)
-                        .addComponent(chkContratoPorHora)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelCnfLayout.createSequentialGroup()
-                        .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(valMaxCorreos, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tiempoEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        panelCnfLayout.setVerticalGroup(
-            panelCnfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCnfLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelCnfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cmbAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(valMaxCorreos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tiempoEspera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelCnfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chkAcuerdo)
-                    .addComponent(jLabel8)
-                    .addComponent(chkContratoPorHora))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(panelCnf, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 900, 100));
-
-        lblTitulo.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Envío Automático de Comprobantes de Pago A.M.D.C.");
-        getContentPane().add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 910, -1));
-
-        pnlEnvios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado de los Envíos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
-        pnlEnvios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel5.setText("Correos enviados de acuerdo");
-        pnlEnvios.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 27));
-
-        jScrollPane2.setBackground(new java.awt.Color(204, 153, 0));
-
-        txtVoucher.setEditable(false);
-        txtVoucher.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
-        txtVoucher.setFocusable(false);
-        jScrollPane2.setViewportView(txtVoucher);
-
-        pnlEnvios.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 94, 870, 220));
-
-        lblCorreosDisponibles.setBackground(new java.awt.Color(255, 204, 255));
-        lblCorreosDisponibles.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        lblCorreosDisponibles.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        pnlEnvios.add(lblCorreosDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 90, 27));
-
-        pbrEnviados.setForeground(new java.awt.Color(0, 255, 51));
-        pnlEnvios.add(pbrEnviados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 193, 10));
-
-        lblPorcentaje.setBackground(new java.awt.Color(255, 204, 204));
-        lblPorcentaje.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblPorcentaje.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        pnlEnvios.add(lblPorcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 60, 26));
-
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
-        jLabel7.setText("Tiempo transcurrido:");
-        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        pnlEnvios.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 23));
-
-        lblTiempoTrancurrido.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
-        lblTiempoTrancurrido.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblTiempoTrancurrido.setText("00:00:00");
-        lblTiempoTrancurrido.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        pnlEnvios.add(lblTiempoTrancurrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 110, -1));
-
-        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel9.setText("Correos enviados de contrato");
-        pnlEnvios.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
-
-        pbrEnviadosCH.setForeground(new java.awt.Color(0, 255, 51));
-        pnlEnvios.add(pbrEnviadosCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 193, 10));
-
-        jLabel10.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
-        jLabel10.setText("Tiempo transcurrido:");
-        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        pnlEnvios.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, 20));
-
-        lblTiempoTrancurridoCH.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
-        lblTiempoTrancurridoCH.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblTiempoTrancurridoCH.setText("00:00:00");
-        lblTiempoTrancurridoCH.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        pnlEnvios.add(lblTiempoTrancurridoCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 110, -1));
-
-        lblCorreosDisponiblesCH.setBackground(new java.awt.Color(255, 204, 255));
-        lblCorreosDisponiblesCH.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        lblCorreosDisponiblesCH.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        pnlEnvios.add(lblCorreosDisponiblesCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 27));
-
-        lblPorcentajeCH.setBackground(new java.awt.Color(255, 204, 204));
-        lblPorcentajeCH.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblPorcentajeCH.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        pnlEnvios.add(lblPorcentajeCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 60, 26));
-
-        lblPlanillasEncontradasCH.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        lblPlanillasEncontradasCH.setText("Planillas encontradas");
-        pnlEnvios.add(lblPlanillasEncontradasCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 179, -1));
-
-        getContentPane().add(pnlEnvios, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 900, 330));
 
         barraTitulo.setBackground(new java.awt.Color(0, 118, 140));
         barraTitulo.setMaximumSize(new java.awt.Dimension(1100, 48));
@@ -375,14 +240,31 @@ public class Principal extends javax.swing.JFrame {
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo_Vouchers.png"))); // NOI18N
         jLabel12.setText("V@UCHERS");
 
+        btnContraer.setBackground(new java.awt.Color(0, 118, 140));
+        btnContraer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_menu_filled_25px.png"))); // NOI18N
+        btnContraer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContraer.setOpaque(true);
+        btnContraer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnContraerMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnContraerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnContraerMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout barraTituloLayout = new javax.swing.GroupLayout(barraTitulo);
         barraTitulo.setLayout(barraTituloLayout);
         barraTituloLayout.setHorizontalGroup(
             barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraTituloLayout.createSequentialGroup()
-                .addContainerGap(431, Short.MAX_VALUE)
+                .addComponent(btnContraer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12)
-                .addGap(380, 380, 380)
+                .addGap(313, 313, 313)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCerrar)
@@ -391,23 +273,24 @@ public class Principal extends javax.swing.JFrame {
         barraTituloLayout.setVerticalGroup(
             barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(barraTituloLayout.createSequentialGroup()
-                .addGroup(barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(barraTituloLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(btnCerrar))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnContraer)
+                    .addGroup(barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(barraTituloLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel11)
+                                .addComponent(btnCerrar)))))
+                .addContainerGap(2, Short.MAX_VALUE))
         );
-
-        getContentPane().add(barraTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1109, -1));
 
         pnlEstado.setBackground(new java.awt.Color(0, 118, 140));
         pnlEstado.setForeground(new java.awt.Color(204, 204, 204));
 
         pbrEnviosCiclo.setBackground(new java.awt.Color(0, 118, 140));
         pbrEnviosCiclo.setForeground(new java.awt.Color(255, 102, 0));
+        pbrEnviosCiclo.setBorderPainted(false);
         pbrEnviosCiclo.setFocusable(false);
         pbrEnviosCiclo.setMaximumSize(new java.awt.Dimension(1082, 6));
         pbrEnviosCiclo.setMinimumSize(new java.awt.Dimension(1082, 6));
@@ -424,26 +307,75 @@ public class Principal extends javax.swing.JFrame {
             pnlEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlEstadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pbrEnviosCiclo, javax.swing.GroupLayout.DEFAULT_SIZE, 1082, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 922, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEstadoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pbrEnviosCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, 922, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         pnlEstadoLayout.setVerticalGroup(
             pnlEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlEstadoLayout.createSequentialGroup()
-                .addComponent(pbrEnviosCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pbrEnviosCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(pnlEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 1110, 50));
-
         mnuLateral.setBackground(new java.awt.Color(49, 66, 82));
-        mnuLateral.setMaximumSize(new java.awt.Dimension(190, 620));
-        mnuLateral.setMinimumSize(new java.awt.Dimension(190, 620));
-        mnuLateral.setPreferredSize(new java.awt.Dimension(190, 620));
+        mnuLateral.setMaximumSize(new java.awt.Dimension(190, 565));
+        mnuLateral.setMinimumSize(new java.awt.Dimension(50, 565));
+        mnuLateral.setPreferredSize(new java.awt.Dimension(50, 565));
+        mnuLateral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        luzEnvio.setBackground(new java.awt.Color(51, 255, 0));
+        luzEnvio.setPreferredSize(new java.awt.Dimension(3, 40));
+
+        javax.swing.GroupLayout luzEnvioLayout = new javax.swing.GroupLayout(luzEnvio);
+        luzEnvio.setLayout(luzEnvioLayout);
+        luzEnvioLayout.setHorizontalGroup(
+            luzEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+        luzEnvioLayout.setVerticalGroup(
+            luzEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        mnuLateral.add(luzEnvio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, -1, -1));
+
+        luzConfig.setBackground(new java.awt.Color(51, 255, 0));
+        luzConfig.setPreferredSize(new java.awt.Dimension(3, 40));
+
+        javax.swing.GroupLayout luzConfigLayout = new javax.swing.GroupLayout(luzConfig);
+        luzConfig.setLayout(luzConfigLayout);
+        luzConfigLayout.setHorizontalGroup(
+            luzConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+        luzConfigLayout.setVerticalGroup(
+            luzConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        mnuLateral.add(luzConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, -1, -1));
+
+        luzInfo.setBackground(new java.awt.Color(51, 255, 0));
+        luzInfo.setPreferredSize(new java.awt.Dimension(3, 40));
+
+        javax.swing.GroupLayout luzInfoLayout = new javax.swing.GroupLayout(luzInfo);
+        luzInfo.setLayout(luzInfoLayout);
+        luzInfoLayout.setHorizontalGroup(
+            luzInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+        luzInfoLayout.setVerticalGroup(
+            luzInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        mnuLateral.add(luzInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, -1, -1));
 
         btnMnuConfig.setBackground(new java.awt.Color(49, 66, 82));
         btnMnuConfig.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -452,6 +384,7 @@ public class Principal extends javax.swing.JFrame {
         btnMnuConfig.setText("Configuración");
         btnMnuConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMnuConfig.setOpaque(true);
+        btnMnuConfig.setPreferredSize(new java.awt.Dimension(190, 40));
         btnMnuConfig.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMnuConfigMouseClicked(evt);
@@ -463,9 +396,7 @@ public class Principal extends javax.swing.JFrame {
                 btnMnuConfigMouseExited(evt);
             }
         });
-
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logoAMDC3_3.5.png"))); // NOI18N
+        mnuLateral.add(btnMnuConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, -1, -1));
 
         btnMnuSalir.setBackground(new java.awt.Color(49, 66, 82));
         btnMnuSalir.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -474,6 +405,7 @@ public class Principal extends javax.swing.JFrame {
         btnMnuSalir.setText("Salir");
         btnMnuSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMnuSalir.setOpaque(true);
+        btnMnuSalir.setPreferredSize(new java.awt.Dimension(190, 40));
         btnMnuSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMnuSalirMouseClicked(evt);
@@ -485,6 +417,7 @@ public class Principal extends javax.swing.JFrame {
                 btnMnuSalirMouseExited(evt);
             }
         });
+        mnuLateral.add(btnMnuSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 514, -1, -1));
 
         btnMnuInfo.setBackground(new java.awt.Color(49, 66, 82));
         btnMnuInfo.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -493,6 +426,7 @@ public class Principal extends javax.swing.JFrame {
         btnMnuInfo.setText("Acerca de...");
         btnMnuInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMnuInfo.setOpaque(true);
+        btnMnuInfo.setPreferredSize(new java.awt.Dimension(186, 40));
         btnMnuInfo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMnuInfoMouseClicked(evt);
@@ -504,64 +438,717 @@ public class Principal extends javax.swing.JFrame {
                 btnMnuInfoMouseExited(evt);
             }
         });
+        mnuLateral.add(btnMnuInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo_Vouchers.png"))); // NOI18N
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo_Vouchers.png"))); // NOI18N
+        mnuLateral.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 12, -1, -1));
 
-        javax.swing.GroupLayout mnuLateralLayout = new javax.swing.GroupLayout(mnuLateral);
-        mnuLateral.setLayout(mnuLateralLayout);
-        mnuLateralLayout.setHorizontalGroup(
-            mnuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnMnuConfig, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-            .addComponent(btnMnuSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnMnuInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(mnuLateralLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        mnuLateralLayout.setVerticalGroup(
-            mnuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mnuLateralLayout.createSequentialGroup()
-                .addGroup(mnuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mnuLateralLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel1))
-                    .addGroup(mnuLateralLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel13)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
-                .addComponent(btnMnuConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMnuInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMnuSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        getContentPane().add(mnuLateral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, 580));
-
-        btnIniciarEnvio.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        btnIniciarEnvio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/envio_comprobantes_amdc/green-mail-send-icon.png"))); // NOI18N
-        btnIniciarEnvio.setText("Iniciar Envío");
-        btnIniciarEnvio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarEnvioActionPerformed(evt);
+        btnMnuEnviar.setBackground(new java.awt.Color(49, 66, 82));
+        btnMnuEnviar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnMnuEnviar.setForeground(new java.awt.Color(204, 204, 204));
+        btnMnuEnviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Envio.png"))); // NOI18N
+        btnMnuEnviar.setText("Envío");
+        btnMnuEnviar.setOpaque(true);
+        btnMnuEnviar.setPreferredSize(new java.awt.Dimension(190, 40));
+        btnMnuEnviar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMnuEnviarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMnuEnviarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMnuEnviarMouseExited(evt);
             }
         });
-        getContentPane().add(btnIniciarEnvio, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 560, -1, 40));
+        mnuLateral.add(btnMnuEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, -1, -1));
+
+        lblNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Nombre.png"))); // NOI18N
+        mnuLateral.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 7, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setText("v 3.3.4");
+        mnuLateral.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 40, -1, -1));
+
+        pnlContenedor.setBackground(new java.awt.Color(204, 255, 204));
+        pnlContenedor.setMinimumSize(new java.awt.Dimension(910, 562));
+        pnlContenedor.setPreferredSize(new java.awt.Dimension(910, 562));
+        pnlContenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlEnvios.setBackground(new java.awt.Color(249, 249, 249));
+        pnlEnvios.setMaximumSize(new java.awt.Dimension(908, 560));
+        pnlEnvios.setMinimumSize(new java.awt.Dimension(908, 560));
+        pnlEnvios.setPreferredSize(new java.awt.Dimension(900, 560));
+        pnlEnvios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblCuentaAtras.setBackground(new java.awt.Color(255, 204, 204));
+        lblCuentaAtras.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblCuentaAtras.setForeground(new java.awt.Color(0, 51, 255));
+        lblCuentaAtras.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        pnlEnvios.add(lblCuentaAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 514, 138, 30));
 
         lblContinuara.setBackground(new java.awt.Color(255, 204, 255));
         lblContinuara.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblContinuara.setForeground(new java.awt.Color(0, 51, 255));
         lblContinuara.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(lblContinuara, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 570, 138, 40));
+        pnlEnvios.add(lblContinuara, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 514, 138, 30));
 
-        lblCuentaAtras.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblCuentaAtras.setForeground(new java.awt.Color(0, 51, 255));
-        lblCuentaAtras.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(lblCuentaAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 580, 100, 26));
+        grupoCnfEnvio.setBackground(new java.awt.Color(249, 249, 249));
+        grupoCnfEnvio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configuración de Envío", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
+        grupoCnfEnvio.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        grupoCnfEnvio.setMaximumSize(new java.awt.Dimension(880, 106));
+        grupoCnfEnvio.setMinimumSize(new java.awt.Dimension(880, 106));
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel2.setText("Año");
+
+        cmbAnio.setBackground(new java.awt.Color(249, 249, 249));
+        cmbAnio.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        cmbAnio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbAnio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbAnioItemStateChanged(evt);
+            }
+        });
+
+        valMaxCorreos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        valMaxCorreos.setToolTipText("Máximo de comprobantes que se eniviarán antes de esperar.");
+        valMaxCorreos.setValue(95);
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel3.setText("Máximo por Envío");
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel4.setText("Mes");
+
+        cmbMes.setBackground(new java.awt.Color(249, 249, 249));
+        cmbMes.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        cmbMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbMes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbMesItemStateChanged(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel6.setText("Tiempo de Espera Entre Envíos (mins)");
+
+        tiempoEspera.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        tiempoEspera.setToolTipText("Tiempo en minutos de espera entre cada envío de comprobantes.");
+        tiempoEspera.setValue(70);
+
+        chkAcuerdo.setBackground(new java.awt.Color(249, 249, 249));
+        chkAcuerdo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        chkAcuerdo.setSelected(true);
+        chkAcuerdo.setText("Acuerdo");
+        chkAcuerdo.setToolTipText("Activar si desea enviar los comprobantes de empleados de acuerdo");
+        chkAcuerdo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chkAcuerdoItemStateChanged(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel8.setText("Enviar comprobantes de:");
+
+        chkContratoPorHora.setBackground(new java.awt.Color(249, 249, 249));
+        chkContratoPorHora.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        chkContratoPorHora.setSelected(true);
+        chkContratoPorHora.setText("Contrato por hora");
+        chkContratoPorHora.setToolTipText("Activar si desea enviar los comprobantes de empleados de contrato por hora.");
+        chkContratoPorHora.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chkContratoPorHoraItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout grupoCnfEnvioLayout = new javax.swing.GroupLayout(grupoCnfEnvio);
+        grupoCnfEnvio.setLayout(grupoCnfEnvioLayout);
+        grupoCnfEnvioLayout.setHorizontalGroup(
+            grupoCnfEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(grupoCnfEnvioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(grupoCnfEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(grupoCnfEnvioLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4))
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(grupoCnfEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(grupoCnfEnvioLayout.createSequentialGroup()
+                        .addComponent(chkAcuerdo)
+                        .addGap(18, 18, 18)
+                        .addComponent(chkContratoPorHora)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(grupoCnfEnvioLayout.createSequentialGroup()
+                        .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(valMaxCorreos, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tiempoEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47))))
+        );
+        grupoCnfEnvioLayout.setVerticalGroup(
+            grupoCnfEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(grupoCnfEnvioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(grupoCnfEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cmbAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(valMaxCorreos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tiempoEspera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(grupoCnfEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkAcuerdo)
+                    .addComponent(jLabel8)
+                    .addComponent(chkContratoPorHora))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlEnvios.add(grupoCnfEnvio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 890, 100));
+
+        lblTitulo.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(102, 102, 102));
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("Envío Automático de Comprobantes de Pago A.M.D.C.");
+        pnlEnvios.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 890, -1));
+
+        grupoEnvios.setBackground(new java.awt.Color(249, 249, 249));
+        grupoEnvios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado de los Envíos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
+        grupoEnvios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel5.setText("Correos enviados de acuerdo");
+        grupoEnvios.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 27));
+
+        jScrollPane2.setBackground(new java.awt.Color(204, 153, 0));
+
+        txtVoucher.setEditable(false);
+        txtVoucher.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        txtVoucher.setFocusable(false);
+        jScrollPane2.setViewportView(txtVoucher);
+
+        grupoEnvios.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 94, 870, 220));
+
+        lblCorreosDisponibles.setBackground(new java.awt.Color(255, 204, 255));
+        lblCorreosDisponibles.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lblCorreosDisponibles.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        grupoEnvios.add(lblCorreosDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 90, 27));
+
+        pbrEnviados.setForeground(new java.awt.Color(0, 255, 51));
+        grupoEnvios.add(pbrEnviados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 193, 10));
+
+        lblPorcentaje.setBackground(new java.awt.Color(255, 204, 204));
+        lblPorcentaje.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblPorcentaje.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        grupoEnvios.add(lblPorcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 60, 26));
+
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel7.setText("Tiempo transcurrido:");
+        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        grupoEnvios.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 23));
+
+        lblTiempoTrancurrido.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        lblTiempoTrancurrido.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblTiempoTrancurrido.setText("00:00:00");
+        lblTiempoTrancurrido.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        grupoEnvios.add(lblTiempoTrancurrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 110, -1));
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel9.setText("Correos enviados de contrato");
+        grupoEnvios.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
+
+        pbrEnviadosCH.setForeground(new java.awt.Color(0, 255, 51));
+        grupoEnvios.add(pbrEnviadosCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 193, 10));
+
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel10.setText("Tiempo transcurrido:");
+        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        grupoEnvios.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, 20));
+
+        lblTiempoTrancurridoCH.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        lblTiempoTrancurridoCH.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblTiempoTrancurridoCH.setText("00:00:00");
+        lblTiempoTrancurridoCH.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        grupoEnvios.add(lblTiempoTrancurridoCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 110, -1));
+
+        lblCorreosDisponiblesCH.setBackground(new java.awt.Color(255, 204, 255));
+        lblCorreosDisponiblesCH.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lblCorreosDisponiblesCH.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        grupoEnvios.add(lblCorreosDisponiblesCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 27));
+
+        lblPorcentajeCH.setBackground(new java.awt.Color(255, 204, 204));
+        lblPorcentajeCH.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblPorcentajeCH.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        grupoEnvios.add(lblPorcentajeCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 60, 26));
+
+        lblPlanillasEncontradasCH.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        lblPlanillasEncontradasCH.setText("Planillas encontradas");
+        grupoEnvios.add(lblPlanillasEncontradasCH, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, 179, -1));
+
+        pnlEnvios.add(grupoEnvios, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 890, 330));
+
+        btnIniciarEnvio.setBackground(new java.awt.Color(49, 66, 82));
+        btnIniciarEnvio.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnIniciarEnvio.setForeground(new java.awt.Color(204, 204, 204));
+        btnIniciarEnvio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnIniciarEnvio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Envio.png"))); // NOI18N
+        btnIniciarEnvio.setText("Iniciar Envío");
+        btnIniciarEnvio.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnIniciarEnvio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnIniciarEnvio.setOpaque(true);
+        btnIniciarEnvio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnIniciarEnvioMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnIniciarEnvioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnIniciarEnvioMouseExited(evt);
+            }
+        });
+        pnlEnvios.add(btnIniciarEnvio, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 504, 220, 50));
+
+        pnlContenedor.add(pnlEnvios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 910, -1));
+
+        pnlAcercaDe.setBackground(new java.awt.Color(249, 249, 249));
+        pnlAcercaDe.setMaximumSize(new java.awt.Dimension(910, 560));
+        pnlAcercaDe.setMinimumSize(new java.awt.Dimension(910, 560));
+        pnlAcercaDe.setPreferredSize(new java.awt.Dimension(910, 560));
+        pnlAcercaDe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Información");
+        pnlAcercaDe.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 890, -1));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Acerca_de_v334_sobre3.png"))); // NOI18N
+        pnlAcercaDe.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
+
+        pnlContenedor.add(pnlAcercaDe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        pnlConfiguracion.setBackground(new java.awt.Color(249, 249, 249));
+        pnlConfiguracion.setMaximumSize(new java.awt.Dimension(910, 560));
+        pnlConfiguracion.setMinimumSize(new java.awt.Dimension(910, 560));
+        pnlConfiguracion.setPreferredSize(new java.awt.Dimension(910, 560));
+        pnlConfiguracion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Configuraciones");
+        pnlConfiguracion.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 880, -1));
+
+        pnlCnf_DB.setBackground(new java.awt.Color(249, 249, 249));
+        pnlCnf_DB.setMaximumSize(new java.awt.Dimension(880, 350));
+        pnlCnf_DB.setMinimumSize(new java.awt.Dimension(880, 350));
+        pnlCnf_DB.setPreferredSize(new java.awt.Dimension(880, 350));
+
+        jLabel16.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel16.setText("URL");
+
+        txtURL.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtURL.setForeground(new java.awt.Color(102, 102, 102));
+
+        jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel17.setText("Puerto");
+
+        txtPuerto.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtPuerto.setForeground(new java.awt.Color(102, 102, 102));
+        txtPuerto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPuertoActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel18.setText("Base de Datos");
+
+        txtBaseDatos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtBaseDatos.setForeground(new java.awt.Color(102, 102, 102));
+
+        jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel19.setText("usuario");
+
+        txtUsuarioDB.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtUsuarioDB.setForeground(new java.awt.Color(102, 102, 102));
+
+        jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel20.setText("Contraseña");
+
+        txtPassDB.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtPassDB.setForeground(new java.awt.Color(102, 102, 102));
+
+        jLabel25.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel25.setText("Conexión de Base de Datos");
+
+        btnProbarDB.setBackground(new java.awt.Color(49, 66, 82));
+        btnProbarDB.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnProbarDB.setForeground(new java.awt.Color(204, 204, 204));
+        btnProbarDB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnProbarDB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_accept_database_38px.png"))); // NOI18N
+        btnProbarDB.setText("Probar Conexión");
+        btnProbarDB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProbarDB.setOpaque(true);
+        btnProbarDB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProbarDBMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnProbarDBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnProbarDBMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlCnf_DBLayout = new javax.swing.GroupLayout(pnlCnf_DB);
+        pnlCnf_DB.setLayout(pnlCnf_DBLayout);
+        pnlCnf_DBLayout.setHorizontalGroup(
+            pnlCnf_DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCnf_DBLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlCnf_DBLayout.createSequentialGroup()
+                .addGap(259, 259, 259)
+                .addGroup(pnlCnf_DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20))
+                .addGap(18, 18, 18)
+                .addGroup(pnlCnf_DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPassDB, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBaseDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtURL, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPuerto, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuarioDB, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 246, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCnf_DBLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnProbarDB, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(273, 273, 273))
+        );
+        pnlCnf_DBLayout.setVerticalGroup(
+            pnlCnf_DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCnf_DBLayout.createSequentialGroup()
+                .addComponent(jLabel25)
+                .addGap(38, 38, 38)
+                .addGroup(pnlCnf_DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(txtURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlCnf_DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(txtPuerto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(pnlCnf_DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(txtBaseDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(pnlCnf_DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtUsuarioDB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlCnf_DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(txtPassDB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(btnProbarDB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pnlConfiguracion.add(pnlCnf_DB, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 880, 350));
+
+        pnlCnf_barraMenu.setBackground(new java.awt.Color(49, 66, 82));
+        pnlCnf_barraMenu.setMaximumSize(new java.awt.Dimension(900, 90));
+        pnlCnf_barraMenu.setMinimumSize(new java.awt.Dimension(900, 90));
+        pnlCnf_barraMenu.setPreferredSize(new java.awt.Dimension(900, 90));
+        pnlCnf_barraMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnCnf_logos.setBackground(new java.awt.Color(49, 66, 82));
+        btnCnf_logos.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnCnf_logos.setForeground(new java.awt.Color(204, 204, 204));
+        btnCnf_logos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCnf_logos.setText("Logos");
+        btnCnf_logos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCnf_logos.setMaximumSize(new java.awt.Dimension(220, 45));
+        btnCnf_logos.setMinimumSize(new java.awt.Dimension(220, 45));
+        btnCnf_logos.setOpaque(true);
+        btnCnf_logos.setPreferredSize(new java.awt.Dimension(220, 45));
+        btnCnf_logos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCnf_logosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCnf_logosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCnf_logosMouseExited(evt);
+            }
+        });
+        pnlCnf_barraMenu.add(btnCnf_logos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
+
+        btnCnf_DB.setBackground(new java.awt.Color(49, 66, 82));
+        btnCnf_DB.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnCnf_DB.setForeground(new java.awt.Color(204, 204, 204));
+        btnCnf_DB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCnf_DB.setText("Base de Datos");
+        btnCnf_DB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCnf_DB.setMaximumSize(new java.awt.Dimension(220, 45));
+        btnCnf_DB.setMinimumSize(new java.awt.Dimension(220, 45));
+        btnCnf_DB.setOpaque(true);
+        btnCnf_DB.setPreferredSize(new java.awt.Dimension(220, 45));
+        btnCnf_DB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCnf_DBMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCnf_DBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCnf_DBMouseExited(evt);
+            }
+        });
+        pnlCnf_barraMenu.add(btnCnf_DB, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, -1, -1));
+
+        btnCnf_correos.setBackground(new java.awt.Color(49, 66, 82));
+        btnCnf_correos.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnCnf_correos.setForeground(new java.awt.Color(204, 204, 204));
+        btnCnf_correos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCnf_correos.setText("Correos");
+        btnCnf_correos.setMaximumSize(new java.awt.Dimension(220, 45));
+        btnCnf_correos.setMinimumSize(new java.awt.Dimension(220, 45));
+        btnCnf_correos.setOpaque(true);
+        btnCnf_correos.setPreferredSize(new java.awt.Dimension(220, 45));
+        btnCnf_correos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCnf_correosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCnf_correosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCnf_correosMouseExited(evt);
+            }
+        });
+        pnlCnf_barraMenu.add(btnCnf_correos, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, -1, -1));
+
+        luzCnf_logos.setBackground(new java.awt.Color(51, 255, 0));
+        luzCnf_logos.setPreferredSize(new java.awt.Dimension(3, 3));
+
+        javax.swing.GroupLayout luzCnf_logosLayout = new javax.swing.GroupLayout(luzCnf_logos);
+        luzCnf_logos.setLayout(luzCnf_logosLayout);
+        luzCnf_logosLayout.setHorizontalGroup(
+            luzCnf_logosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
+        );
+        luzCnf_logosLayout.setVerticalGroup(
+            luzCnf_logosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+
+        pnlCnf_barraMenu.add(luzCnf_logos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 55, 220, -1));
+
+        luzCnf_DB.setBackground(new java.awt.Color(51, 255, 0));
+        luzCnf_DB.setPreferredSize(new java.awt.Dimension(3, 3));
+
+        javax.swing.GroupLayout luzCnf_DBLayout = new javax.swing.GroupLayout(luzCnf_DB);
+        luzCnf_DB.setLayout(luzCnf_DBLayout);
+        luzCnf_DBLayout.setHorizontalGroup(
+            luzCnf_DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
+        );
+        luzCnf_DBLayout.setVerticalGroup(
+            luzCnf_DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+
+        pnlCnf_barraMenu.add(luzCnf_DB, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 55, 220, -1));
+
+        luzCnf_correos.setBackground(new java.awt.Color(51, 255, 0));
+        luzCnf_correos.setPreferredSize(new java.awt.Dimension(3, 3));
+
+        javax.swing.GroupLayout luzCnf_correosLayout = new javax.swing.GroupLayout(luzCnf_correos);
+        luzCnf_correos.setLayout(luzCnf_correosLayout);
+        luzCnf_correosLayout.setHorizontalGroup(
+            luzCnf_correosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
+        );
+        luzCnf_correosLayout.setVerticalGroup(
+            luzCnf_correosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+
+        pnlCnf_barraMenu.add(luzCnf_correos, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 55, 220, -1));
+
+        pnlConfiguracion.add(pnlCnf_barraMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 910, 90));
+
+        pnlCnf_logos.setBackground(new java.awt.Color(249, 249, 249));
+        pnlCnf_logos.setMaximumSize(new java.awt.Dimension(880, 350));
+        pnlCnf_logos.setMinimumSize(new java.awt.Dimension(880, 350));
+        pnlCnf_logos.setPreferredSize(new java.awt.Dimension(880, 350));
+        pnlCnf_logos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel21.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel21.setText("URL Logo Izq.");
+        pnlCnf_logos.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 70, -1, -1));
+
+        txtUrlLogoIzq.setForeground(new java.awt.Color(102, 102, 102));
+        txtUrlLogoIzq.setToolTipText("");
+        txtUrlLogoIzq.setMaximumSize(new java.awt.Dimension(6, 20));
+        txtUrlLogoIzq.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUrlLogoIzqKeyTyped(evt);
+            }
+        });
+        pnlCnf_logos.add(txtUrlLogoIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 580, -1));
+
+        jLabel22.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel22.setText("URL Logo Der.");
+        pnlCnf_logos.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 102, -1, -1));
+
+        txtUrlLogoDer.setForeground(new java.awt.Color(102, 102, 102));
+        txtUrlLogoDer.setMaximumSize(new java.awt.Dimension(6, 20));
+        txtUrlLogoDer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUrlLogoDerKeyTyped(evt);
+            }
+        });
+        pnlCnf_logos.add(txtUrlLogoDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 580, -1));
+
+        jTxtPane_logos.setContentType("text/html"); // NOI18N
+        jScrollPane1.setViewportView(jTxtPane_logos);
+
+        pnlCnf_logos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 780, 170));
+
+        jLabel23.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel23.setText("Muestra");
+        pnlCnf_logos.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        btnRecargarConfigInterna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/recargar_img.png"))); // NOI18N
+        btnRecargarConfigInterna.setToolTipText("Recargar URLs de logos por defecto.");
+        btnRecargarConfigInterna.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRecargarConfigInterna.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRecargarConfigInternaMouseClicked(evt);
+            }
+        });
+        pnlCnf_logos.add(btnRecargarConfigInterna, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 70, -1, -1));
+
+        jLabel28.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel28.setText("Configuración de Logos");
+        pnlCnf_logos.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 860, -1));
+
+        pnlConfiguracion.add(pnlCnf_logos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+
+        pnlCnf_correo.setBackground(new java.awt.Color(249, 249, 249));
+        pnlCnf_correo.setMaximumSize(new java.awt.Dimension(880, 350));
+        pnlCnf_correo.setMinimumSize(new java.awt.Dimension(880, 350));
+        pnlCnf_correo.setPreferredSize(new java.awt.Dimension(880, 350));
+
+        jLabel24.setFont(new java.awt.Font("Century Gothic", 2, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel24.setText("Configuración de Correo");
+
+        jLabel26.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(184, 0, 0));
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel26.setText("La configuración de correo es tomada directamente del servidor.");
+
+        javax.swing.GroupLayout pnlCnf_correoLayout = new javax.swing.GroupLayout(pnlCnf_correo);
+        pnlCnf_correo.setLayout(pnlCnf_correoLayout);
+        pnlCnf_correoLayout.setHorizontalGroup(
+            pnlCnf_correoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCnf_correoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlCnf_correoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnlCnf_correoLayout.setVerticalGroup(
+            pnlCnf_correoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCnf_correoLayout.createSequentialGroup()
+                .addComponent(jLabel24)
+                .addGap(135, 135, 135)
+                .addComponent(jLabel26)
+                .addGap(0, 161, Short.MAX_VALUE))
+        );
+
+        pnlConfiguracion.add(pnlCnf_correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+
+        btnGuardarConfiguracion.setBackground(new java.awt.Color(49, 66, 82));
+        btnGuardarConfiguracion.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        btnGuardarConfiguracion.setForeground(new java.awt.Color(204, 204, 204));
+        btnGuardarConfiguracion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnGuardarConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_save_38px.png"))); // NOI18N
+        btnGuardarConfiguracion.setText("Guardar");
+        btnGuardarConfiguracion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardarConfiguracion.setOpaque(true);
+        btnGuardarConfiguracion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarConfiguracionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarConfiguracionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarConfiguracionMouseExited(evt);
+            }
+        });
+        pnlConfiguracion.add(btnGuardarConfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 505, 260, 50));
+
+        pnlContenedor.add(pnlConfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(mnuLateral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(barraTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(pnlEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(barraTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(mnuLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)))
+                .addComponent(pnlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -570,7 +1157,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (cargado) {
             cargado = false;
-            
+
             hiloProcesos = new ThreadProcesos("llenarMeses");
             hiloProcesos.start();
 
@@ -584,35 +1171,13 @@ public class Principal extends javax.swing.JFrame {
                 hiloProcesos = new ThreadProcesos("getCorreosDiponibles");
                 hiloProcesos.start();
             }
-            
+
             if (chkContratoPorHora.isSelected()) {
                 hiloProcesos = new ThreadProcesos("getCorreosDiponiblesCH");
                 hiloProcesos.start();
             }
         }
     }//GEN-LAST:event_cmbMesItemStateChanged
-
-    private void btnIniciarEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarEnvioActionPerformed
-        // TODO add your handling code here:
-
-        boolean ac = chkAcuerdo.isSelected();
-        boolean ch = chkContratoPorHora.isSelected();
-
-        if (ac || ch) {
-
-            Object[] opciones = {"Si", "No"};
-            int OP = JOptionPane.showOptionDialog(null, "Desea iniciar el envío de comprobantes?", "Confirmación", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-
-            if (OP == 0) {
-                hiloProcesos = new ThreadProcesos("iniciarEnvio");
-                hiloProcesos.start();
-
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un tipo de comprobantes para ser enviados", "ERROR",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnIniciarEnvioActionPerformed
 
     private void chkAcuerdoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkAcuerdoItemStateChanged
         // TODO add your handling code here:
@@ -662,12 +1227,16 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnMnuConfigMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuConfigMouseEntered
         // TODO add your handling code here:
-        btnMnuConfig.setBackground(new java.awt.Color(0, 118, 140));
+        if (menuActivo != 2) {
+            btnMnuConfig.setBackground(new java.awt.Color(0, 118, 140));
+            activarLuz();
+        }
     }//GEN-LAST:event_btnMnuConfigMouseEntered
 
     private void btnMnuConfigMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuConfigMouseExited
         // TODO add your handling code here:
-        btnMnuConfig.setBackground(new java.awt.Color(49,66,82));
+        btnMnuConfig.setBackground(new java.awt.Color(49, 66, 82));
+        activarLuz();
     }//GEN-LAST:event_btnMnuConfigMouseExited
 
     private void btnMnuSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuSalirMouseEntered
@@ -677,17 +1246,21 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnMnuSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuSalirMouseExited
         // TODO add your handling code here:
-        btnMnuSalir.setBackground(new java.awt.Color(49,66,82));
+        btnMnuSalir.setBackground(new java.awt.Color(49, 66, 82));
     }//GEN-LAST:event_btnMnuSalirMouseExited
 
     private void btnMnuInfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuInfoMouseEntered
         // TODO add your handling code here:
-        btnMnuInfo.setBackground(new java.awt.Color(0, 118, 140));
+        if (menuActivo != 3) {
+            btnMnuInfo.setBackground(new java.awt.Color(0, 118, 140));
+            activarLuz();
+        }
     }//GEN-LAST:event_btnMnuInfoMouseEntered
 
     private void btnMnuInfoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuInfoMouseExited
         // TODO add your handling code here:
-        btnMnuInfo.setBackground(new java.awt.Color(49,66,82));
+        btnMnuInfo.setBackground(new java.awt.Color(49, 66, 82));
+        activarLuz();
     }//GEN-LAST:event_btnMnuInfoMouseExited
 
     private void btnMnuSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuSalirMouseClicked
@@ -697,13 +1270,285 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnMnuInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuInfoMouseClicked
         // TODO add your handling code here:
-        mostrarAcercaDe();
+        if (menuActivo != 3) {
+            menuActivo = 3;
+
+            mostrarPanelActivo(pnlAcercaDe);
+            activarLuz();
+
+        }
     }//GEN-LAST:event_btnMnuInfoMouseClicked
 
     private void btnMnuConfigMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuConfigMouseClicked
         // TODO add your handling code here:
-        mostrarConfiguracion();
+        if (menuActivo != 2) {
+            menuActivo = 2;
+            menuCnfActivo = 1;
+            mostrarPanelActivo(pnlConfiguracion);
+            ocultarPanelesCnf();
+            mostrarPanelActivoCnf(pnlCnf_barraMenu);
+            mostrarPanelActivoCnf(pnlCnf_logos);
+            activarLuz();
+            activarCnfLuz();
+            recuperarInformacion();
+        }
     }//GEN-LAST:event_btnMnuConfigMouseClicked
+
+    private void btnContraerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContraerMouseEntered
+        // TODO add your handling code here:
+        btnContraer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_menu_25px.png")));
+    }//GEN-LAST:event_btnContraerMouseEntered
+
+    private void btnContraerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContraerMouseExited
+        // TODO add your handling code here:
+        btnContraer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_menu_filled_25px.png")));
+    }//GEN-LAST:event_btnContraerMouseExited
+
+    private void btnMnuEnviarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuEnviarMouseEntered
+        // TODO add your handling code here:
+        if (menuActivo != 1) {
+            btnMnuEnviar.setBackground(new java.awt.Color(0, 118, 140));
+            activarLuz();
+        }
+    }//GEN-LAST:event_btnMnuEnviarMouseEntered
+
+    private void btnMnuEnviarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuEnviarMouseExited
+        // TODO add your handling code here:
+        btnMnuEnviar.setBackground(new java.awt.Color(49, 66, 82));
+        activarLuz();
+
+    }//GEN-LAST:event_btnMnuEnviarMouseExited
+
+    private void btnIniciarEnvioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarEnvioMouseEntered
+        // TODO add your handling code here:
+
+        if (btnIniciarEnvio.isEnabled()) {
+            btnIniciarEnvio.setBackground(new java.awt.Color(0, 118, 140));
+        }
+    }//GEN-LAST:event_btnIniciarEnvioMouseEntered
+
+    private void btnIniciarEnvioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarEnvioMouseExited
+        // TODO add your handling code here:
+        if (btnIniciarEnvio.isEnabled()) {
+            btnIniciarEnvio.setBackground(new java.awt.Color(49, 66, 82));
+        }
+    }//GEN-LAST:event_btnIniciarEnvioMouseExited
+
+    private void btnIniciarEnvioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarEnvioMouseClicked
+        // TODO add your handling code here:
+        if (btnIniciarEnvio.isEnabled()) {
+            boolean ac = chkAcuerdo.isSelected();
+            boolean ch = chkContratoPorHora.isSelected();
+
+            if (ac || ch) {
+
+                Object[] opciones = {"Si", "No"};
+                int OP = JOptionPane.showOptionDialog(null, "Desea iniciar el envío de comprobantes?", "Confirmación", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+
+                if (OP == 0) {
+                    hiloProcesos = new ThreadProcesos("iniciarEnvio");
+                    hiloProcesos.start();
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un tipo de comprobantes para ser enviados", "ERROR",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnIniciarEnvioMouseClicked
+
+    private void btnMnuEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMnuEnviarMouseClicked
+        // TODO add your handling code here:
+        if (menuActivo != 1) {
+            menuActivo = 1;
+            mostrarPanelActivo(pnlEnvios);
+            activarLuz();
+        }
+    }//GEN-LAST:event_btnMnuEnviarMouseClicked
+
+    private void txtUrlLogoIzqKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUrlLogoIzqKeyTyped
+        // TODO add your handling code here:
+        this.mostrarPreview();
+    }//GEN-LAST:event_txtUrlLogoIzqKeyTyped
+
+    private void txtUrlLogoDerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUrlLogoDerKeyTyped
+        // TODO add your handling code here:
+        this.mostrarPreview();
+    }//GEN-LAST:event_txtUrlLogoDerKeyTyped
+
+    private void btnRecargarConfigInternaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRecargarConfigInternaMouseClicked
+        // TODO add your handling code here:
+        String li = "https://lh3.googleusercontent.com/sCG99HG8o51kkOnYc0sLjWEtVkyE3UqN19qNhRCzM8xRNzLh5C6wrKefrbMMKrHAxnhu6nz3LAAUOpjshesSz9ZvVIkLWr5Q18cNU049uz5Saza6mJAfUQfYZ5ODmf62U1rIt54Ujg=w2400";
+        String ld = "http://lh3.googleusercontent.com/1vfHKJDGrMNsbsjRurXOpNtEzyez_Thp_pIHH7tTyFAilZaapN6Ca784rSRLyEsy5qmkJ8l9YedeqihjUpBB24nXSDm876vcZ-UyXqwoFtBvk4CPzs3HQ4tA_cFxsCnpiavNrOKLdw=w2400";
+
+        this.txtUrlLogoIzq.setText(li);
+        this.txtUrlLogoDer.setText(ld);
+
+        this.mostrarPreview();
+
+    }//GEN-LAST:event_btnRecargarConfigInternaMouseClicked
+
+    private void txtPuertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPuertoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPuertoActionPerformed
+
+    private void btnCnf_logosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCnf_logosMouseEntered
+        // TODO add your handling code here:
+        if (menuCnfActivo != 1) {
+            btnCnf_logos.setBackground(new java.awt.Color(0, 118, 140));
+            activarCnfLuz();
+        }
+    }//GEN-LAST:event_btnCnf_logosMouseEntered
+
+    private void btnCnf_logosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCnf_logosMouseExited
+        // TODO add your handling code here:
+        btnCnf_logos.setBackground(new java.awt.Color(49, 66, 82));
+        activarCnfLuz();
+    }//GEN-LAST:event_btnCnf_logosMouseExited
+
+    private void btnCnf_logosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCnf_logosMouseClicked
+        // TODO add your handling code here:
+        if (menuCnfActivo != 1) {
+            menuCnfActivo = 1;
+            ocultarPanelesCnf();
+            //mostrarPanelActivo(pnlConfiguracion);
+            mostrarPanelActivoCnf(pnlCnf_barraMenu);
+            mostrarPanelActivoCnf(pnlCnf_logos);
+            activarCnfLuz();
+        }
+    }//GEN-LAST:event_btnCnf_logosMouseClicked
+
+    private void btnCnf_DBMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCnf_DBMouseEntered
+        // TODO add your handling code here:
+        if (menuCnfActivo != 2) {
+            btnCnf_DB.setBackground(new java.awt.Color(0, 118, 140));
+            activarCnfLuz();
+        }
+    }//GEN-LAST:event_btnCnf_DBMouseEntered
+
+    private void btnCnf_DBMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCnf_DBMouseExited
+        // TODO add your handling code here:
+        btnCnf_DB.setBackground(new java.awt.Color(49, 66, 82));
+        activarCnfLuz();
+    }//GEN-LAST:event_btnCnf_DBMouseExited
+
+    private void btnCnf_DBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCnf_DBMouseClicked
+        // TODO add your handling code here:
+        if (menuCnfActivo != 2) {
+            menuCnfActivo = 2;
+            ocultarPanelesCnf();
+            //mostrarPanelActivo(pnlConfiguracion);
+            mostrarPanelActivoCnf(pnlCnf_barraMenu);
+            mostrarPanelActivoCnf(pnlCnf_DB);
+            activarCnfLuz();
+        }
+    }//GEN-LAST:event_btnCnf_DBMouseClicked
+
+    private void btnCnf_correosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCnf_correosMouseEntered
+        // TODO add your handling code here:
+        if (menuCnfActivo != 3) {
+            btnCnf_correos.setBackground(new java.awt.Color(0, 118, 140));
+            activarCnfLuz();
+        }
+    }//GEN-LAST:event_btnCnf_correosMouseEntered
+
+    private void btnCnf_correosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCnf_correosMouseExited
+        // TODO add your handling code here:
+        btnCnf_correos.setBackground(new java.awt.Color(49, 66, 82));
+        activarCnfLuz();
+    }//GEN-LAST:event_btnCnf_correosMouseExited
+
+    private void btnCnf_correosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCnf_correosMouseClicked
+        // TODO add your handling code here:
+        if (menuCnfActivo != 3) {
+            menuCnfActivo = 3;
+            ocultarPanelesCnf();
+            //mostrarPanelActivo(pnlConfiguracion);
+            mostrarPanelActivoCnf(pnlCnf_barraMenu);
+            mostrarPanelActivoCnf(pnlCnf_correo);
+            activarCnfLuz();
+        }
+    }//GEN-LAST:event_btnCnf_correosMouseClicked
+
+    private void btnProbarDBMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProbarDBMouseEntered
+        // TODO add your handling code here:
+        btnProbarDB.setBackground(new java.awt.Color(0, 118, 140));
+    }//GEN-LAST:event_btnProbarDBMouseEntered
+
+    private void btnProbarDBMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProbarDBMouseExited
+        // TODO add your handling code here:
+        btnProbarDB.setBackground(new java.awt.Color(49, 66, 82));
+    }//GEN-LAST:event_btnProbarDBMouseExited
+
+    private void btnProbarDBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProbarDBMouseClicked
+        // TODO add your handling code here:
+        Con_DB db = new Con_DB();
+        String urlDB = txtURL.getText().trim();
+        String puertoDB = txtPuerto.getText().trim();
+        String nombreDB = txtBaseDatos.getText().trim();
+        String usuarioDB = txtUsuarioDB.getText().trim();
+        String passDB = txtPassDB.getText().trim();
+
+        if (db.probarConexion(urlDB, puertoDB, nombreDB, usuarioDB, passDB)) {
+            JOptionPane.showMessageDialog(null, "Conexión Exitosa!!!:", "PRUEBA DE CONEXIÓN",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnProbarDBMouseClicked
+
+    private void btnGuardarConfiguracionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarConfiguracionMouseClicked
+        // TODO add your handling code here:
+        guardarConfiguracion();
+    }//GEN-LAST:event_btnGuardarConfiguracionMouseClicked
+
+    private void btnGuardarConfiguracionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarConfiguracionMouseEntered
+        // TODO add your handling code here:
+        btnGuardarConfiguracion.setBackground(new java.awt.Color(0, 118, 140));
+    }//GEN-LAST:event_btnGuardarConfiguracionMouseEntered
+
+    private void btnGuardarConfiguracionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarConfiguracionMouseExited
+        // TODO add your handling code here:
+        btnGuardarConfiguracion.setBackground(new java.awt.Color(49, 66, 82));
+    }//GEN-LAST:event_btnGuardarConfiguracionMouseExited
+
+    private void btnContraerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContraerMouseClicked
+        // TODO add your handling code here:
+        int anchoForm = this.getWidth();
+        int altoForm = this.getHeight();
+
+        System.out.println("");
+        int maxMenu = 190;
+        int minMenu = 50;
+        int d = maxMenu - minMenu;
+
+        if (ampliar) {
+            //JFrame
+            this.setMaximumSize(null);
+            this.setSize(new Dimension(anchoForm + d, altoForm));
+
+            //Redimencionar paneles
+            redimencionarPanel(mnuLateral, d);
+
+            //Otros cambios
+            btnContraer.setToolTipText("Ocultar menú");
+
+            ampliar = false;
+        } else {
+            
+            //Jframe
+            this.getContentPane().setMinimumSize(new Dimension(anchoForm + d, altoForm));
+            this.getContentPane().setMaximumSize(new Dimension(anchoForm + d, altoForm));
+            this.setSize(new Dimension(anchoForm - d, altoForm));
+
+            //Redimencionar paneles
+            redimencionarPanel(mnuLateral, d);
+
+            //Otros cambios
+            btnContraer.setToolTipText("Mostrat menú");
+
+            ampliar = true;
+        }
+        mnuLateral.setLocation(new Point(0, 48));
+    }//GEN-LAST:event_btnContraerMouseClicked
 
     /**
      * @param args the command line arguments
@@ -752,7 +1597,281 @@ public class Principal extends javax.swing.JFrame {
             System.exit(0);
         }
     }
-    
+
+    private void guardarConfiguracion() {
+        // TODO add your handling code here:
+        String urlLogoI = txtUrlLogoIzq.getText().trim();
+        String urlLogoD = txtUrlLogoDer.getText().trim();
+        String url = txtURL.getText().trim();
+        String puerto = txtPuerto.getText().trim();
+        String nombreDB = txtBaseDatos.getText().trim();
+        String usuarioDB = txtUsuarioDB.getText().trim();
+        String passDB = txtPassDB.getText().trim();
+
+        if (urlLogoI.length() == 0) {
+            urlLogoI = "Vacio";
+        }
+        if (urlLogoD.length() == 0) {
+            urlLogoD = "Vacio";
+        }
+
+        if (urlLogoD.length() == 0 || urlLogoI.length() == 0 || url.length() == 0 || puerto.length() == 0 || nombreDB.length() == 0 || usuarioDB.length() == 0 || passDB.length() == 0) {
+            JOptionPane.showMessageDialog(null, "Datos de configuración o datos de conexión a base de datos está incompleta", "ERROR",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            Con_DB db = new Con_DB();
+            if (db.probarConexion(url, puerto, nombreDB, usuarioDB, passDB)) {
+                String cadenaConf = url + "#&&#" + puerto + "#&&#" + nombreDB + "#&&#" + usuarioDB + "#&&#" + passDB + "#&&#" + urlLogoI + "#&&#" + urlLogoD;
+
+                String ruta = "";
+                File midir = new File(".");
+                try {
+                    ruta = midir.getCanonicalPath();
+
+                } catch (IOException e) {
+                }
+
+                //Cifrar los datos
+                TripleDes tDES = new TripleDes();
+                String confCifrada = tDES.encriptar_txt_3DES(cadenaConf);
+
+                String rutaArchivo = ruta + "\\src\\configuraciones\\config_DB.cnf";
+                File cnf = new File(rutaArchivo);
+
+                if (!cnf.exists()) {
+                    try {
+                        cnf.createNewFile();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                FileWriter fw;
+
+                try {
+
+                    fw = new FileWriter(cnf);
+                    try (BufferedWriter bw = new BufferedWriter(fw)) {
+                        PrintWriter salida = new PrintWriter(bw);
+                        salida.write(confCifrada);
+
+                    }
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Error al guardar configuración:\n" + e.getMessage(), "ERROR",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+
+                JOptionPane.showMessageDialog(null, "La configuración se guardó exitosamente!!", "CONFIGURACIÓN GUARDADA",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        }
+    }
+
+    private void reubicarPanel(Component p, int d, boolean ampliar) {
+
+        int xP = (int) p.getX();
+        int yP = (int) p.getY();
+
+        if (ampliar) {
+            p.setLocation(new Point(xP + d, yP));
+        } else {
+            p.setLocation(xP - d, yP);
+        }
+
+    }
+
+    private void redimencionarPanel(Component p, int d) {
+        int anchoOriginal = p.getWidth();
+        int altoOriginal = p.getHeight();
+
+        
+        if (ampliar) {
+            p.setPreferredSize(new Dimension(anchoOriginal + d, altoOriginal));
+        } else {
+            p.setPreferredSize(new Dimension(anchoOriginal - d, altoOriginal));
+        }
+ 
+    }
+
+    private void ocultarPaneles() {
+        pnlEnvios.setVisible(false);
+        pnlConfiguracion.setVisible(false);
+        pnlAcercaDe.setVisible(false);
+        pnlCnf_DB.setVisible(false);
+
+    }
+
+    private void ocultarPanelesCnf() {
+        pnlCnf_DB.setVisible(false);
+        pnlCnf_barraMenu.setVisible(false);
+        pnlCnf_logos.setVisible(false);
+        pnlCnf_correo.setVisible(false);
+    }
+
+    private void mostrarPanelActivoCnf(JPanel p) {
+
+        p.setVisible(true);
+    }
+
+    private void mostrarPanelActivo(JPanel p) {
+        ocultarPaneles();
+        p.setVisible(true);
+    }
+
+    private void apagarLuces() {
+        luzConfig.setVisible(false);
+        luzInfo.setVisible(false);
+        luzEnvio.setVisible(false);
+    }
+
+    private void activarLuz() {
+        apagarLuces();
+        Color color = new java.awt.Color(51, 255, 0);
+        Component c = null;
+        switch (menuActivo) {
+            case 1:
+                c = luzEnvio;
+                break;
+            case 2:
+                c = luzConfig;
+                break;
+            case 3:
+                c = luzInfo;
+                break;
+            default:
+                c = luzEnvio;
+                break;
+        }
+
+        c.setBackground(color);
+        c.setVisible(true);
+    }
+
+    private void apagarCnfLuces() {
+        luzCnf_DB.setVisible(false);
+        luzCnf_correos.setVisible(false);
+        luzCnf_logos.setVisible(false);
+    }
+
+    private void activarCnfLuz() {
+        apagarCnfLuces();
+        Color color = new java.awt.Color(51, 255, 0);
+        Component c = null;
+        switch (menuCnfActivo) {
+            case 1:
+                c = luzCnf_logos;
+                break;
+            case 2:
+                c = luzCnf_DB;
+                break;
+            case 3:
+                c = luzCnf_correos;
+                break;
+            default:
+                c = luzCnf_logos;
+                break;
+        }
+
+        c.setBackground(color);
+        c.setVisible(true);
+    }
+
+    private void mostrarPreview() {
+        String urlLogoI = txtUrlLogoIzq.getText();
+        String urlLogoD = txtUrlLogoDer.getText();
+
+        //https://lh3.googleusercontent.com/sCG99HG8o51kkOnYc0sLjWEtVkyE3UqN19qNhRCzM8xRNzLh5C6wrKefrbMMKrHAxnhu6nz3LAAUOpjshesSz9ZvVIkLWr5Q18cNU049uz5Saza6mJAfUQfYZ5ODmf62U1rIt54Ujg=w2400
+        //http://lh3.googleusercontent.com/1vfHKJDGrMNsbsjRurXOpNtEzyez_Thp_pIHH7tTyFAilZaapN6Ca784rSRLyEsy5qmkJ8l9YedeqihjUpBB24nXSDm876vcZ-UyXqwoFtBvk4CPzs3HQ4tA_cFxsCnpiavNrOKLdw=w2400
+        String voucher_demo = "<html><head></head><body><div style=\"margin-top: 0px; font-family: arial; font-size: 8px;\">"
+                + "<div>"
+                + "<table border=\"0\" width=\"1\" cellspacing=\"1\" cellpadding=\"0\" style=\"width: 100%;\">"
+                + "<tbody>"
+                + "<tr>"
+                + "<td>"
+                + "<img width=\"40\" alt=\"Logo_izq\" src=\"" + urlLogoI + "\"/>"
+                + "</td>"
+                + "<td style=\"text-align: center; font-size: 6px;\">"
+                + "<p><span style='font-size: 8px;'><b>ALCALDIA MUNICIPAL DEL DISTRITO CENTRAL</b></span><br><span style='font-size: 7px;'><b>GERENCIA DE RECURSOS HUMANOS</b></span><br><span style='font-size: 7px;'><b>DEPARTAMENTO DE PLANILLAS</b></span><br>Comprobante de Pago de MES" + " de AÑO" + "</p>"
+                + "</td>"
+                + "<td style = \"text-align: right;\">"
+                + "<img width = \"40\" alt = \"Logo_der\" src=\"" + urlLogoD + "\"/>"
+                + "</td>"
+                + "</tr>"
+                + "</tbody>"
+                + "</table>"
+                + "</div></body></html>";
+
+        try {
+            jTxtPane_logos.setText(voucher_demo);
+        } catch (Exception e) {
+        }
+    }
+
+    private void recuperarInformacion() {
+
+        String ruta = "";
+        File midir = new File(".");
+        try {
+            ruta = midir.getCanonicalPath();
+
+        } catch (IOException e) {
+        }
+
+        String rutaArchivo = ruta + "\\src\\configuraciones\\config_DB.cnf";
+        File cnf = new File(rutaArchivo);
+        //Validar que el archivo existe
+        if (!cnf.exists()) {
+
+        } else {
+
+            //validar que contiene parametros guardados
+            FileReader fr;
+            String texto;
+            String textoCifrado = "";
+            try {
+                fr = new FileReader(rutaArchivo);
+
+                BufferedReader br = new BufferedReader(fr);
+
+                while ((texto = br.readLine()) != null) {
+                    //System.out.println(texto);
+                    textoCifrado = textoCifrado + texto;
+                }
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            TripleDes tDES = new TripleDes();
+
+            String txtDecifrado = tDES.desEncriptar_txt_3DES(textoCifrado);
+
+//            System.out.println(txtDecifrado);
+            String datos[] = txtDecifrado.split("#&&#");
+
+//            for (String dato : datos) {
+//                System.out.println(dato);
+//            }
+            jTxtPane_logos.setContentType("text/html");
+            this.txtURL.setText(datos[0]);
+            this.txtPuerto.setText(datos[1]);
+            this.txtBaseDatos.setText(datos[2]);
+            this.txtUsuarioDB.setText(datos[3]);
+            this.txtPassDB.setText(datos[4]);
+            this.txtUrlLogoIzq.setText(datos[5]);
+            this.txtUrlLogoDer.setText(datos[6]);
+
+//            this.txtUrlLogoIzq.setMaximumSize(new java.awt.Dimension(6, 20));
+            this.mostrarPreview();
+
+//            this.urlLogoIzq = datos[5];
+//            this.urlLogoDer = datos[6];
+        }
+    }
+
     public void mostrarConfiguracion() {
         ConfiguracionInterna f = new ConfiguracionInterna(this, true);
         int w = 476;
@@ -761,7 +1880,7 @@ public class Principal extends javax.swing.JFrame {
         f.setMaximumSize(new Dimension(w, h));
         f.setResizable(false);
         f.setTitle("Configuración de Conexión y Logos");
-        
+
         //obtener el tamaño de la pantalla
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -774,7 +1893,7 @@ public class Principal extends javax.swing.JFrame {
 
         f.setVisible(true);
     }
-    
+
     public void mostrarAcercaDe() {
         AcercaDe f = new AcercaDe(this);
         int w = 413;
@@ -783,7 +1902,7 @@ public class Principal extends javax.swing.JFrame {
         f.setMaximumSize(new Dimension(w, h));
         f.setResizable(false);
         f.setTitle("Acerca De ...");
-        
+
         //obtener el tamaño de la pantalla
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -810,21 +1929,45 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel barraTitulo;
     private javax.swing.JLabel btnCerrar;
-    public static javax.swing.JButton btnIniciarEnvio;
+    private javax.swing.JLabel btnCnf_DB;
+    private javax.swing.JLabel btnCnf_correos;
+    private javax.swing.JLabel btnCnf_logos;
+    private javax.swing.JLabel btnContraer;
+    private javax.swing.JLabel btnGuardarConfiguracion;
+    public static javax.swing.JLabel btnIniciarEnvio;
     private javax.swing.JLabel btnMnuConfig;
+    private javax.swing.JLabel btnMnuEnviar;
     private javax.swing.JLabel btnMnuInfo;
     private javax.swing.JLabel btnMnuSalir;
+    private javax.swing.JLabel btnProbarDB;
+    private javax.swing.JLabel btnRecargarConfigInterna;
     private javax.swing.ButtonGroup buttonGroup1;
     public static javax.swing.JCheckBox chkAcuerdo;
     public static javax.swing.JCheckBox chkContratoPorHora;
     public static javax.swing.JComboBox<String> cmbAnio;
     public static javax.swing.JComboBox<String> cmbMes;
+    private javax.swing.JPanel grupoCnfEnvio;
+    private javax.swing.JPanel grupoEnvios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -832,26 +1975,49 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextPane jTxtPane_logos;
     public static final javax.swing.JLabel lblContinuara = new javax.swing.JLabel();
     public static javax.swing.JLabel lblCorreosDisponibles;
     public static javax.swing.JLabel lblCorreosDisponiblesCH;
     public static javax.swing.JLabel lblCuentaAtras;
     public static javax.swing.JLabel lblEstado;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblNombre;
     public static javax.swing.JLabel lblPlanillasEncontradasCH;
     public static javax.swing.JLabel lblPorcentaje;
     public static javax.swing.JLabel lblPorcentajeCH;
     public static javax.swing.JLabel lblTiempoTrancurrido;
     public static javax.swing.JLabel lblTiempoTrancurridoCH;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel luzCnf_DB;
+    private javax.swing.JPanel luzCnf_correos;
+    private javax.swing.JPanel luzCnf_logos;
+    private javax.swing.JPanel luzConfig;
+    private javax.swing.JPanel luzEnvio;
+    private javax.swing.JPanel luzInfo;
     private javax.swing.JPanel mnuLateral;
-    private javax.swing.JPanel panelCnf;
     public static javax.swing.JProgressBar pbrEnviados;
     public static javax.swing.JProgressBar pbrEnviadosCH;
     public static javax.swing.JProgressBar pbrEnviosCiclo;
+    private javax.swing.JPanel pnlAcercaDe;
+    private javax.swing.JPanel pnlCnf_DB;
+    private javax.swing.JPanel pnlCnf_barraMenu;
+    private javax.swing.JPanel pnlCnf_correo;
+    private javax.swing.JPanel pnlCnf_logos;
+    private javax.swing.JPanel pnlConfiguracion;
+    private javax.swing.JPanel pnlContenedor;
     private javax.swing.JPanel pnlEnvios;
     private javax.swing.JPanel pnlEstado;
     public static javax.swing.JSpinner tiempoEspera;
+    private javax.swing.JTextField txtBaseDatos;
+    private javax.swing.JPasswordField txtPassDB;
+    private javax.swing.JTextField txtPuerto;
+    private javax.swing.JTextField txtURL;
+    private javax.swing.JTextField txtUrlLogoDer;
+    private javax.swing.JTextField txtUrlLogoIzq;
+    private javax.swing.JTextField txtUsuarioDB;
     public static javax.swing.JTextPane txtVoucher;
     public static javax.swing.JSpinner valMaxCorreos;
     // End of variables declaration//GEN-END:variables
@@ -859,9 +2025,14 @@ public class Principal extends javax.swing.JFrame {
     public static boolean cargado = false;
     static Thread hiloProcesos = null;
     public static ThreadProcesos P = null;
-    
+
     private int xf;
     private int yf;
+
+    int menuActivo = 1;
+    int menuCnfActivo = 1;
+
+    boolean ampliar = true;
 
     public static boolean enviando = false;
 }

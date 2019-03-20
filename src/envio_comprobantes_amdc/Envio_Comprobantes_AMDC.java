@@ -30,13 +30,14 @@ public class Envio_Comprobantes_AMDC {
         // TODO code application logic here
         
             mostrarSplash();
+//              mostrarLogIn();
             
     }
     
      public static void mostrarSplash() {
         Splash f = new Splash();
-        int w = 532;
-        int h = 434;
+        int w = 610;
+        int h = 480;
         f.setMinimumSize(new Dimension(w, h));
         f.setMaximumSize(new Dimension(w, h));
         f.setResizable(false);
@@ -52,7 +53,7 @@ public class Envio_Comprobantes_AMDC {
         // Asignar la ventana
         f.setLocation(x, y);
 
-        f.setAlwaysOnTop(true);
+//        f.setAlwaysOnTop(true);
         //this.setEnabled(false);
 //        try {
 //            f.getRootPane().setOpaque(false);
@@ -62,7 +63,7 @@ public class Envio_Comprobantes_AMDC {
 //        }
         f.setVisible(true);
         Splash.llenarBarra();
-        esperar(1000);
+        esperar(300);
         
         f.dispose();
         

@@ -322,8 +322,8 @@ public class LogIn extends javax.swing.JFrame {
 
     public static void mostrarPantallaPrincipal() {
         Principal f = new Principal();
-        int w = 1100;//799;
-        int h = 550;//411;
+        int w = 960;//799;
+        int h = 650;//411;
         f.setMinimumSize(new Dimension(w, h));
         f.setMaximumSize(new Dimension(w, h));
         f.setResizable(false);
