@@ -495,7 +495,7 @@ public class Principal extends javax.swing.JFrame {
         pnlEnvios.add(lblContinuara, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 514, 138, 30));
 
         grupoCnfEnvio.setBackground(new java.awt.Color(249, 249, 249));
-        grupoCnfEnvio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configuración de Envío", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
+        grupoCnfEnvio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configuración de Envío", 0, 0, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
         grupoCnfEnvio.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         grupoCnfEnvio.setMaximumSize(new java.awt.Dimension(880, 106));
         grupoCnfEnvio.setMinimumSize(new java.awt.Dimension(880, 106));
@@ -626,7 +626,7 @@ public class Principal extends javax.swing.JFrame {
         pnlEnvios.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 890, -1));
 
         grupoEnvios.setBackground(new java.awt.Color(249, 249, 249));
-        grupoEnvios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado de los Envíos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
+        grupoEnvios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado de los Envíos", 0, 0, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
         grupoEnvios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -1131,7 +1131,6 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(mnuLateral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1144,9 +1143,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(barraTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(mnuLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)))
+                    .addComponent(mnuLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(pnlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 

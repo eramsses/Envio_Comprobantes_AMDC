@@ -826,9 +826,8 @@ public class ThreadProcesos extends Thread {
                         Principal.txtVoucher.setContentType("text/html");
                         Principal.txtVoucher.setText(voucher);
 
-//                        TimeUnit.SECONDS.sleep(1);
                         //enviar correo SMTP
-//                        correoEmpleado = "erick.rodriguez@amdc.hn";
+
                         //Recuperar configuración de conexion
                         asunto = codEmpleado + " Comprobante de Pago de " + mesSel + " de " + anio;
 
@@ -866,6 +865,7 @@ public class ThreadProcesos extends Thread {
                                 errorEnvio = true;
                             }
                             Principal.lblEstado.setText("ERROR: " + e.getMessage());
+                            TimeUnit.SECONDS.sleep(5);
 //                            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR",
 //                                    JOptionPane.ERROR_MESSAGE);
                             //throw new RuntimeException(e);
@@ -935,6 +935,7 @@ public class ThreadProcesos extends Thread {
 
             tiempoTranscurridoActivo = false;
             Principal.lblEstado.setForeground(Color.GREEN);
+            Principal.txtVoucher.setText("");
             Principal.lblEstado.setText("Envío finalizado exitosamente!!!");
             db.cierraConexion();
         }
@@ -1374,6 +1375,7 @@ public class ThreadProcesos extends Thread {
                                     errorEnvio = true;
                                 }
                                 Principal.lblEstado.setText("ERROR: " + e.getMessage());
+                                TimeUnit.SECONDS.sleep(5);
 //                            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR",
 //                                    JOptionPane.ERROR_MESSAGE);
                                 //throw new RuntimeException(e);
