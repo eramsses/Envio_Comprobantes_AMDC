@@ -36,8 +36,8 @@ public class Envio_Comprobantes_AMDC {
     
      public static void mostrarSplash() {
         Splash f = new Splash();
-        int w = 610;
-        int h = 480;
+        int w = 700;
+        int h = 610;
         f.setMinimumSize(new Dimension(w, h));
         f.setMaximumSize(new Dimension(w, h));
         f.setResizable(false);
@@ -107,12 +107,12 @@ public class Envio_Comprobantes_AMDC {
 
     public static void mostrarConfiguracion() {
         Configuracion f = new Configuracion();
-        int w = 485;
-        int h = 600;
+        int w = 700;
+        int h = 640;
         f.setMinimumSize(new Dimension(w, h));
         f.setMaximumSize(new Dimension(w, h));
         f.setResizable(false);
-        f.setTitle("Configuración");
+        f.setTitle("Configuración Inicial");
 
         //obtener el tamaño de la pantalla
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

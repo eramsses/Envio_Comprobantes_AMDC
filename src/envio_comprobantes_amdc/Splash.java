@@ -13,6 +13,17 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -38,7 +49,7 @@ public class Splash extends javax.swing.JFrame {
         Splash.this.setOpacity(0.92f);
 
         lblImgSplash.setBackground(new Color(0, 0, 0, 0));
-
+        setVersion();
         llenarBarra();
     }
     
@@ -75,9 +86,16 @@ public class Splash extends javax.swing.JFrame {
         getContentPane().add(pBar_inicio);
         pBar_inicio.setBounds(120, 360, 380, 6);
 
+        lblVerSplash.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblVerSplash.setForeground(new java.awt.Color(153, 153, 153));
+        lblVerSplash.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblVerSplash.setText("Versión 4.0.1");
+        getContentPane().add(lblVerSplash);
+        lblVerSplash.setBounds(200, 140, 250, 30);
+
         lblImgSplash.setBackground(new java.awt.Color(102, 102, 102));
         lblImgSplash.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblImgSplash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Splash_Vouchers_hex_v334.png"))); // NOI18N
+        lblImgSplash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Splash_Vouchers_hex_gen.png"))); // NOI18N
         lblImgSplash.setMaximumSize(new java.awt.Dimension(610, 480));
         lblImgSplash.setMinimumSize(new java.awt.Dimension(610, 480));
         lblImgSplash.setOpaque(true);
@@ -137,6 +155,67 @@ public class Splash extends javax.swing.JFrame {
         catch (Exception e) { 
         } 
     } 
+    
+    private void setVersion() {
+        String ruta = "";
+        File midir = new File(".");
+        try {
+            ruta = midir.getCanonicalPath();
+
+        } catch (IOException e) {
+        }
+
+        String rutaArchivo = ruta + "\\src\\configuraciones\\version.cnf";
+        File ver = new File(rutaArchivo);
+        //Validar que el archivo existe
+        if (!ver.exists()) {
+            try {
+                ver.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            FileWriter fw;
+
+                try {
+
+                    fw = new FileWriter(ver);
+                    try (BufferedWriter bw = new BufferedWriter(fw)) {
+                        PrintWriter salida = new PrintWriter(bw);
+                        salida.write("4.0.1");
+
+                    }
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Error al guardar configuración:\n" + e.getMessage(), "ERROR",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+        } //else {
+
+            
+            FileReader fr;
+            String texto;
+            String txtVersion = "";
+            try {
+                fr = new FileReader(rutaArchivo);
+
+                BufferedReader br = new BufferedReader(fr);
+
+                while ((texto = br.readLine()) != null) {
+                    //System.out.println(texto);
+                    txtVersion = txtVersion + texto;
+                }
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        //}
+        
+        lblVerSplash.setText(txtVersion);
+
+    }
 
     /**
      * @param args the command line arguments
@@ -175,6 +254,7 @@ public class Splash extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblImgSplash;
+    public static final javax.swing.JLabel lblVerSplash = new javax.swing.JLabel();
     private static javax.swing.JProgressBar pBar_inicio;
     // End of variables declaration//GEN-END:variables
 }

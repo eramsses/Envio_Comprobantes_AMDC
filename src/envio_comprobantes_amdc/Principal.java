@@ -63,6 +63,8 @@ public class Principal extends javax.swing.JFrame {
         ocultarPanelesCnf();
         mostrarPanelActivo(pnlEnvios);
         activarLuz();
+        
+        setVersion();
 
         this.addWindowListener(new WindowAdapter() {
 
@@ -120,7 +122,7 @@ public class Principal extends javax.swing.JFrame {
         lblLogo = new javax.swing.JLabel();
         btnMnuEnviar = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblVer1 = new javax.swing.JLabel();
         pnlContenedor = new javax.swing.JPanel();
         pnlEnvios = new javax.swing.JPanel();
         lblCuentaAtras = new javax.swing.JLabel();
@@ -156,6 +158,7 @@ public class Principal extends javax.swing.JFrame {
         btnIniciarEnvio = new javax.swing.JLabel();
         pnlAcercaDe = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        lblVerAbout = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         pnlConfiguracion = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -189,6 +192,12 @@ public class Principal extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         btnRecargarConfigInterna = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
+        txtTituloL1 = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        txtTituloL2 = new javax.swing.JTextField();
+        txtTituloL3 = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
         pnlCnf_correo = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -466,10 +475,11 @@ public class Principal extends javax.swing.JFrame {
         lblNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Nombre.png"))); // NOI18N
         mnuLateral.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 7, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setText("v 3.3.4");
-        mnuLateral.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 40, -1, -1));
+        lblVer1.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        lblVer1.setForeground(new java.awt.Color(204, 204, 204));
+        lblVer1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblVer1.setText("v 3.3.4");
+        mnuLateral.add(lblVer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 40, 120, -1));
 
         pnlContenedor.setBackground(new java.awt.Color(204, 255, 204));
         pnlContenedor.setMinimumSize(new java.awt.Dimension(910, 562));
@@ -495,7 +505,7 @@ public class Principal extends javax.swing.JFrame {
         pnlEnvios.add(lblContinuara, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 514, 138, 30));
 
         grupoCnfEnvio.setBackground(new java.awt.Color(249, 249, 249));
-        grupoCnfEnvio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configuración de Envío", 0, 0, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
+        grupoCnfEnvio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configuración de Envío", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
         grupoCnfEnvio.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         grupoCnfEnvio.setMaximumSize(new java.awt.Dimension(880, 106));
         grupoCnfEnvio.setMinimumSize(new java.awt.Dimension(880, 106));
@@ -626,7 +636,7 @@ public class Principal extends javax.swing.JFrame {
         pnlEnvios.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 890, -1));
 
         grupoEnvios.setBackground(new java.awt.Color(249, 249, 249));
-        grupoEnvios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado de los Envíos", 0, 0, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
+        grupoEnvios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estado de los Envíos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
         grupoEnvios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -736,8 +746,15 @@ public class Principal extends javax.swing.JFrame {
         jLabel13.setText("Información");
         pnlAcercaDe.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 890, -1));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Acerca_de_v334_sobre3.png"))); // NOI18N
-        pnlAcercaDe.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
+        lblVerAbout.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblVerAbout.setForeground(new java.awt.Color(153, 153, 153));
+        lblVerAbout.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblVerAbout.setText("Versión 4.0.1");
+        pnlAcercaDe.add(lblVerAbout, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 210, 170, -1));
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Acerca_de_gen.png"))); // NOI18N
+        pnlAcercaDe.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 860, 440));
 
         pnlContenedor.add(pnlAcercaDe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -1043,12 +1060,12 @@ public class Principal extends javax.swing.JFrame {
         jTxtPane_logos.setContentType("text/html"); // NOI18N
         jScrollPane1.setViewportView(jTxtPane_logos);
 
-        pnlCnf_logos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 780, 170));
+        pnlCnf_logos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 780, 90));
 
         jLabel23.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(102, 102, 102));
         jLabel23.setText("Muestra");
-        pnlCnf_logos.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        pnlCnf_logos.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
         btnRecargarConfigInterna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/recargar_img.png"))); // NOI18N
         btnRecargarConfigInterna.setToolTipText("Recargar URLs de logos por defecto.");
@@ -1062,8 +1079,47 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel28.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel28.setText("Configuración de Logos");
+        jLabel28.setText("Configuración de Logos y Encabezados");
         pnlCnf_logos.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 860, -1));
+
+        txtTituloL1.setForeground(new java.awt.Color(102, 102, 102));
+        txtTituloL1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTituloL1KeyReleased(evt);
+            }
+        });
+        pnlCnf_logos.add(txtTituloL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 580, -1));
+
+        jLabel30.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel30.setText("Linea 3");
+        pnlCnf_logos.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
+
+        txtTituloL2.setForeground(new java.awt.Color(102, 102, 102));
+        txtTituloL2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTituloL2KeyReleased(evt);
+            }
+        });
+        pnlCnf_logos.add(txtTituloL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 580, -1));
+
+        txtTituloL3.setForeground(new java.awt.Color(102, 102, 102));
+        txtTituloL3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTituloL3KeyReleased(evt);
+            }
+        });
+        pnlCnf_logos.add(txtTituloL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 580, -1));
+
+        jLabel33.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel33.setText("Linea 1");
+        pnlCnf_logos.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
+
+        jLabel34.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel34.setText("Linea 2");
+        pnlCnf_logos.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
         pnlConfiguracion.add(pnlCnf_logos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
@@ -1530,7 +1586,7 @@ public class Principal extends javax.swing.JFrame {
 
             ampliar = false;
         } else {
-            
+
             //Jframe
             this.getContentPane().setMinimumSize(new Dimension(anchoForm + d, altoForm));
             this.getContentPane().setMaximumSize(new Dimension(anchoForm + d, altoForm));
@@ -1546,6 +1602,21 @@ public class Principal extends javax.swing.JFrame {
         }
         mnuLateral.setLocation(new Point(0, 48));
     }//GEN-LAST:event_btnContraerMouseClicked
+
+    private void txtTituloL1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloL1KeyReleased
+        this.mostrarPreview();
+
+    }//GEN-LAST:event_txtTituloL1KeyReleased
+
+    private void txtTituloL2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloL2KeyReleased
+        // TODO add your handling code here:
+        this.mostrarPreview();
+    }//GEN-LAST:event_txtTituloL2KeyReleased
+
+    private void txtTituloL3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloL3KeyReleased
+        // TODO add your handling code here:
+        this.mostrarPreview();
+    }//GEN-LAST:event_txtTituloL3KeyReleased
 
     /**
      * @param args the command line arguments
@@ -1595,10 +1666,76 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    private void setVersion() {
+        String ruta = "";
+        File midir = new File(".");
+        try {
+            ruta = midir.getCanonicalPath();
+
+        } catch (IOException e) {
+        }
+
+        String rutaArchivo = ruta + "\\src\\configuraciones\\version.cnf";
+        File ver = new File(rutaArchivo);
+        //Validar que el archivo existe
+        if (!ver.exists()) {
+            try {
+                ver.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            FileWriter fw;
+
+                try {
+
+                    fw = new FileWriter(ver);
+                    try (BufferedWriter bw = new BufferedWriter(fw)) {
+                        PrintWriter salida = new PrintWriter(bw);
+                        salida.write("4.0.1");
+
+                    }
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Error al guardar configuración:\n" + e.getMessage(), "ERROR",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+        } //else {
+
+            
+            FileReader fr;
+            String texto;
+            String txtVersion = "";
+            try {
+                fr = new FileReader(rutaArchivo);
+
+                BufferedReader br = new BufferedReader(fr);
+
+                while ((texto = br.readLine()) != null) {
+                    //System.out.println(texto);
+                    txtVersion = txtVersion + texto;
+                }
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        //}
+        
+        lblVer1.setText(txtVersion);
+        lblVerAbout.setText(txtVersion);
+        Splash.lblVerSplash.setText(txtVersion);
+
+    }
+
     private void guardarConfiguracion() {
         // TODO add your handling code here:
         String urlLogoI = txtUrlLogoIzq.getText().trim();
         String urlLogoD = txtUrlLogoDer.getText().trim();
+        String tituloLinea1 = txtTituloL1.getText().trim();
+        String tituloLinea2 = txtTituloL2.getText().trim();
+        String tituloLinea3 = txtTituloL3.getText().trim();
         String url = txtURL.getText().trim();
         String puerto = txtPuerto.getText().trim();
         String nombreDB = txtBaseDatos.getText().trim();
@@ -1618,7 +1755,8 @@ public class Principal extends javax.swing.JFrame {
         } else {
             Con_DB db = new Con_DB();
             if (db.probarConexion(url, puerto, nombreDB, usuarioDB, passDB)) {
-                String cadenaConf = url + "#&&#" + puerto + "#&&#" + nombreDB + "#&&#" + usuarioDB + "#&&#" + passDB + "#&&#" + urlLogoI + "#&&#" + urlLogoD;
+                String cadenaConf = url + "#&&#" + puerto + "#&&#" + nombreDB + "#&&#" + usuarioDB + "#&&#" + passDB + "#&&#" + urlLogoI
+                        + "#&&#" + urlLogoD + "#&&#" + tituloLinea1 + "#&&#" + tituloLinea2 + "#&&#" + tituloLinea3;
 
                 String ruta = "";
                 File midir = new File(".");
@@ -1682,13 +1820,12 @@ public class Principal extends javax.swing.JFrame {
         int anchoOriginal = p.getWidth();
         int altoOriginal = p.getHeight();
 
-        
         if (ampliar) {
             p.setPreferredSize(new Dimension(anchoOriginal + d, altoOriginal));
         } else {
             p.setPreferredSize(new Dimension(anchoOriginal - d, altoOriginal));
         }
- 
+
     }
 
     private void ocultarPaneles() {
@@ -1778,6 +1915,10 @@ public class Principal extends javax.swing.JFrame {
         String urlLogoI = txtUrlLogoIzq.getText();
         String urlLogoD = txtUrlLogoDer.getText();
 
+        String tituloLinea1 = txtTituloL1.getText().trim();
+        String tituloLinea2 = txtTituloL2.getText().trim();
+        String tituloLinea3 = txtTituloL3.getText().trim();
+
         //https://lh3.googleusercontent.com/sCG99HG8o51kkOnYc0sLjWEtVkyE3UqN19qNhRCzM8xRNzLh5C6wrKefrbMMKrHAxnhu6nz3LAAUOpjshesSz9ZvVIkLWr5Q18cNU049uz5Saza6mJAfUQfYZ5ODmf62U1rIt54Ujg=w2400
         //http://lh3.googleusercontent.com/1vfHKJDGrMNsbsjRurXOpNtEzyez_Thp_pIHH7tTyFAilZaapN6Ca784rSRLyEsy5qmkJ8l9YedeqihjUpBB24nXSDm876vcZ-UyXqwoFtBvk4CPzs3HQ4tA_cFxsCnpiavNrOKLdw=w2400
         String voucher_demo = "<html><head></head><body><div style=\"margin-top: 0px; font-family: arial; font-size: 8px;\">"
@@ -1789,7 +1930,7 @@ public class Principal extends javax.swing.JFrame {
                 + "<img width=\"40\" alt=\"Logo_izq\" src=\"" + urlLogoI + "\"/>"
                 + "</td>"
                 + "<td style=\"text-align: center; font-size: 6px;\">"
-                + "<p><span style='font-size: 8px;'><b>ALCALDIA MUNICIPAL DEL DISTRITO CENTRAL</b></span><br><span style='font-size: 7px;'><b>GERENCIA DE RECURSOS HUMANOS</b></span><br><span style='font-size: 7px;'><b>DEPARTAMENTO DE PLANILLAS</b></span><br>Comprobante de Pago de MES" + " de AÑO" + "</p>"
+                + "<p><span style='font-size: 8px;'><b>" + tituloLinea1 + "</b></span><br><span style='font-size: 7px;'><b>" + tituloLinea2 + "</b></span><br><span style='font-size: 7px;'><b>" + tituloLinea3 + "</b></span><br>Comprobante de Pago de MES" + " de AÑO" + "</p>"
                 + "</td>"
                 + "<td style = \"text-align: right;\">"
                 + "<img width = \"40\" alt = \"Logo_der\" src=\"" + urlLogoD + "\"/>"
@@ -1860,6 +2001,9 @@ public class Principal extends javax.swing.JFrame {
             this.txtPassDB.setText(datos[4]);
             this.txtUrlLogoIzq.setText(datos[5]);
             this.txtUrlLogoDer.setText(datos[6]);
+            this.txtTituloL1.setText(datos[7]);
+            this.txtTituloL2.setText(datos[8]);
+            this.txtTituloL3.setText(datos[9]);
 
 //            this.txtUrlLogoIzq.setMaximumSize(new java.awt.Dimension(6, 20));
             this.mostrarPreview();
@@ -1876,7 +2020,7 @@ public class Principal extends javax.swing.JFrame {
         f.setMinimumSize(new Dimension(w, h));
         f.setMaximumSize(new Dimension(w, h));
         f.setResizable(false);
-        f.setTitle("Configuración de Conexión y Logos");
+        f.setTitle("Configuración de Conexión, Logos y Encabezados");
 
         //obtener el tamaño de la pantalla
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -1945,7 +2089,6 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> cmbMes;
     private javax.swing.JPanel grupoCnfEnvio;
     private javax.swing.JPanel grupoEnvios;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1966,6 +2109,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1988,6 +2134,8 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JLabel lblTiempoTrancurrido;
     public static javax.swing.JLabel lblTiempoTrancurridoCH;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblVer1;
+    private javax.swing.JLabel lblVerAbout;
     private javax.swing.JPanel luzCnf_DB;
     private javax.swing.JPanel luzCnf_correos;
     private javax.swing.JPanel luzCnf_logos;
@@ -2011,6 +2159,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txtBaseDatos;
     private javax.swing.JPasswordField txtPassDB;
     private javax.swing.JTextField txtPuerto;
+    private javax.swing.JTextField txtTituloL1;
+    private javax.swing.JTextField txtTituloL2;
+    private javax.swing.JTextField txtTituloL3;
     private javax.swing.JTextField txtURL;
     private javax.swing.JTextField txtUrlLogoDer;
     private javax.swing.JTextField txtUrlLogoIzq;

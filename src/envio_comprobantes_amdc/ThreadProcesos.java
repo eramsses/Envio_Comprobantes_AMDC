@@ -45,6 +45,10 @@ public class ThreadProcesos extends Thread {
 
     private String urlLogoIzq;
     private String urlLogoDer;
+    
+    private String tituloLinea_1;
+    private String tituloLinea_2;
+    private String tituloLinea_3;
 
     public ThreadProcesos(String funcion) {
         this.funcion = funcion;
@@ -126,6 +130,9 @@ public class ThreadProcesos extends Thread {
 
             this.urlLogoIzq = datos[5];
             this.urlLogoDer = datos[6];
+            this.tituloLinea_1 = datos[7];
+            this.tituloLinea_2 = datos[8];
+            this.tituloLinea_3 = datos[9];
 
         }
     }
@@ -617,10 +624,10 @@ public class ThreadProcesos extends Thread {
                                 + "<img width=\"40\" alt=\"escudo_hn2\" src=\"" + this.urlLogoIzq + "\"/>"
                                 + "</td>"
                                 + "<td style=\"text-align: center; font-size: 12px;\">"
-                                + "<p><span style='font-size: 16px;'><b>ALCALDIA MUNICIPAL DEL DISTRITO CENTRAL</b></span><br><span style='font-size: 13px;'><b>GERENCIA DE RECURSOS HUMANOS</b></span><br><span style='font-size: 12px;'><b>DEPARTAMENTO DE PLANILLAS</b></span><br>Comprobante de Pago de " + mesSel + " de " + anio + "</p>"
+                                + "<p><span style='font-size: 16px;'><b>" + this.tituloLinea_1 + "</b></span><br><span style='font-size: 13px;'><b>" + this.tituloLinea_2 + "</b></span><br><span style='font-size: 12px;'><b>" + this.tituloLinea_3 + "</b></span><br>Comprobante de Pago de " + mesSel + " de " + anio + "</p>"
                                 + "</td>"
                                 + "<td style = \"text-align: right;\">"
-                                + "<img width = \"40\" alt = \"Logo_AMDC\" src=\"" + this.urlLogoDer + "\"/>"
+                                + "<img width = \"40\" alt = \"Logo\" src=\"" + this.urlLogoDer + "\"/>"
                                 + "</td>"
                                 + "</tr>"
                                 + "</tbody>"
@@ -632,7 +639,7 @@ public class ThreadProcesos extends Thread {
                                 + "<tr>"
                                 + "<th style=\"width: 55px; text-align: left;\">NOMBRE</th>"
                                 + "<td>" + nombreEmpleado + "</td>"
-                                + "<th style=\"width: 55px; text-align: left;\">UNIDAD</th>"
+                                + "<th style=\"width: 55px; text-align: left;\">DEPENDENCIA</th>"
                                 + "<td>" + depto + "</td>"
                                 + "</tr>"
                                 + "<tr>"
@@ -642,7 +649,7 @@ public class ThreadProcesos extends Thread {
                                 + "<td>" + cargoEmpleado + "</td>"
                                 + "</tr>"
                                 + "<tr>"
-                                + "<th style=\"width: 55px; text-align: left;\"><b>CODIGO</b></th>"
+                                + "<th style=\"width: 55px; text-align: left;\"><b>CÓDIGO</b></th>"
                                 + "<td>" + codEmpleado + "</td>"
                                 + "<th style=\"width: 55px; text-align: left;\"></th>"
                                 + "<td></td>"
@@ -1214,10 +1221,10 @@ public class ThreadProcesos extends Thread {
                                     + "<img width=\"40\" alt=\"escudo_hn2\" src=\"" + urlLogoIzq + "\"/>"
                                     + "</td>"
                                     + "<td style=\"text-align: center; font-size: 12px;\">"
-                                    + "<p><span style='font-size: 16px;'><b>ALCALDIA MUNICIPAL DEL DISTRITO CENTRAL</b></span><br><span style='font-size: 13px;'><b>GERENCIA DE RECURSOS HUMANOS</b></span><br><span style='font-size: 12px;'><b>DEPARTAMENTO DE PLANILLAS</b></span><br>Comprobante de Pago de <b>" + mesSel + " de " + anio + "</b> en Planilla <b>" + tipoPlan + "</b></p>"
+                                    + "<p><span style='font-size: 16px;'><b>" + this.tituloLinea_1 + "</b></span><br><span style='font-size: 13px;'><b>" + this.tituloLinea_2 + "</b></span><br><span style='font-size: 12px;'><b>" + this.tituloLinea_3 + "</b></span><br>Comprobante de Pago de " + mesSel + " de " + anio + "</p>"
                                     // + "<img width = \"0\" alt = \"\" src=\"" + urlLogoDer + "\"/></td>"
                                     + "<td style = \"text-align: right;\">"
-                                    + "<img width = \"40\" alt = \"Logo_AMDC\" src=\"" + urlLogoDer + "\"/>"
+                                    + "<img width = \"40\" alt = \"Logo\" src=\"" + urlLogoDer + "\"/>"
                                     + "</td>"
                                     + "</tr>"
                                     + "</tbody>"
@@ -1227,24 +1234,24 @@ public class ThreadProcesos extends Thread {
                                     + "<div>"
                                     + "<table border=\"0\" width=\"2\" cellspacing=\"0\" cellpadding=\"3\" style=\"width: 100%;\">"
                                     + "<tr>"
-                                    + "<th style=\"width: 90px; text-align: left;\">Nombre</th>"
+                                    + "<th style=\"width: 90px; text-align: left;\">NOMBRE</th>"
                                     + "<td>" + nombreEmpleado + "</td>"
-                                    + "<th style=\"width: 90px; text-align: left;\">Unidad</th>"
+                                    + "<th style=\"width: 90px; text-align: left;\">DEPENDENCIA</th>"
                                     + "<td>" + depto + "</td>"
                                     + "</tr>"
                                     + "<tr>"
-                                    + "<th style=\"width: 90px; text-align: left;\"><b>Identidad</b></th>"
+                                    + "<th style=\"width: 90px; text-align: left;\"><b>IDENTIDAD</b></th>"
                                     + "<td>" + identidad + "</td>"
-                                    + "<th style=\"width: 90px; text-align: left;\">Cargo</th>"
+                                    + "<th style=\"width: 90px; text-align: left;\">CARGO</th>"
                                     + "<td>" + cargoEmpleado + "</td>"
                                     + "</tr>"
                                     + "<tr>"
-                                    + "<th style=\"width: 90px; text-align: left;\"><b>Código</b></th>"
+                                    + "<th style=\"width: 90px; text-align: left;\"><b>CÓDIGO</b></th>"
                                     + "<td>" + codEmpleado + "</td>"
-                                    + "<th style=\"width: 90px; text-align: left;\">Modalidad</th>"
+                                    + "<th style=\"width: 90px; text-align: left;\">MODALIDAD</th>"
                                     + "<td>CONTRATO POR HORA</td>"
                                     + "</tr>"
-                                    + "<th style=\"width: 90px; text-align: left;\"><b>Nº Contrato</b></th>"
+                                    + "<th style=\"width: 90px; text-align: left;\"><b>Nº CONTRATO</b></th>"
                                     + "<td>" + num_contrato + "</td>"
                                     + "<th style=\"width: 90px; text-align: left;\"></th>"
                                     + "<td></td>"

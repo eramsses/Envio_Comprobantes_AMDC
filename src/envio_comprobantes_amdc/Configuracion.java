@@ -87,69 +87,91 @@ public class Configuracion extends javax.swing.JFrame {
         jTxtPane_logo_izq = new javax.swing.JTextPane();
         jLabel9 = new javax.swing.JLabel();
         btnRecargarConfig = new javax.swing.JLabel();
+        txtTituloL1 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtTituloL2 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        txtTituloL3 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
+        setMinimumSize(new java.awt.Dimension(700, 617));
+        setPreferredSize(new java.awt.Dimension(700, 617));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Configuración");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 428, -1));
+        jLabel1.setText("Configuración Inicial");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 680, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("URL");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
-        getContentPane().add(txtURL, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 261, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
+        getContentPane().add(txtURL, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 470, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Puerto");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, -1, -1));
-        getContentPane().add(txtPuerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 261, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
+        getContentPane().add(txtPuerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 470, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Base de Datos");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
-        getContentPane().add(txtBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 261, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, -1, -1));
+        getContentPane().add(txtBaseDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, 470, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("usuario");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, -1, -1));
-        getContentPane().add(txtUsuarioDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 261, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
+        getContentPane().add(txtUsuarioDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 470, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Contraseña");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
-        getContentPane().add(txtPassDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 261, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, -1, -1));
+        getContentPane().add(txtPassDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, 470, -1));
 
+        btnGuardarDB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_save_38px.png"))); // NOI18N
         btnGuardarDB.setText("Guardar");
         btnGuardarDB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarDBActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardarDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, 122, -1));
+        getContentPane().add(btnGuardarDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 520, 160, 50));
 
+        btnProbarDB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/probar_db.png"))); // NOI18N
         btnProbarDB.setText("Probar DB");
         btnProbarDB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProbarDBActionPerformed(evt);
             }
         });
-        getContentPane().add(btnProbarDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 130, -1));
+        getContentPane().add(btnProbarDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, 130, 50));
 
+        btnSalirCnf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salir-de-mi-perfil-icono-3964-32.png"))); // NOI18N
         btnSalirCnf.setText("Salir");
+        btnSalirCnf.setMaximumSize(new java.awt.Dimension(113, 47));
+        btnSalirCnf.setMinimumSize(new java.awt.Dimension(113, 47));
         btnSalirCnf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirCnfActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalirCnf, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 480, 98, -1));
+        getContentPane().add(btnSalirCnf, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 520, 130, 50));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("URL Logo Izq.");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 61, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
+        txtUrlLogoIzq.setForeground(new java.awt.Color(102, 102, 102));
         txtUrlLogoIzq.setToolTipText("");
         txtUrlLogoIzq.setMaximumSize(new java.awt.Dimension(6, 20));
         txtUrlLogoIzq.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -157,11 +179,12 @@ public class Configuracion extends javax.swing.JFrame {
                 txtUrlLogoIzqKeyTyped(evt);
             }
         });
-        getContentPane().add(txtUrlLogoIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 58, 261, -1));
+        getContentPane().add(txtUrlLogoIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 480, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("URL Logo Der.");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 92, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         txtUrlLogoDer.setMaximumSize(new java.awt.Dimension(6, 20));
         txtUrlLogoDer.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -169,14 +192,15 @@ public class Configuracion extends javax.swing.JFrame {
                 txtUrlLogoDerKeyTyped(evt);
             }
         });
-        getContentPane().add(txtUrlLogoDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 89, 261, -1));
+        getContentPane().add(txtUrlLogoDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 480, -1));
 
         jScrollPane1.setViewportView(jTxtPane_logo_izq);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 135, 430, 110));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 630, 110));
 
-        jLabel9.setText("Muestra");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 115, -1, -1));
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel9.setText("Encabezados");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         btnRecargarConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/recargar_img.png"))); // NOI18N
         btnRecargarConfig.setToolTipText("Recargar URLs de logos por defecto.");
@@ -186,7 +210,46 @@ public class Configuracion extends javax.swing.JFrame {
                 btnRecargarConfigMouseClicked(evt);
             }
         });
-        getContentPane().add(btnRecargarConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, -1, -1));
+        getContentPane().add(btnRecargarConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 60, -1, -1));
+
+        txtTituloL1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTituloL1KeyReleased(evt);
+            }
+        });
+        getContentPane().add(txtTituloL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 480, -1));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel11.setText("Linea 1");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel12.setText("Linea 2");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+
+        txtTituloL2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTituloL2KeyReleased(evt);
+            }
+        });
+        getContentPane().add(txtTituloL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 480, -1));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel13.setText("Linea 3");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+
+        txtTituloL3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTituloL3KeyReleased(evt);
+            }
+        });
+        getContentPane().add(txtTituloL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 480, -1));
+
+        jLabel10.setText("Muestra");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -195,6 +258,9 @@ public class Configuracion extends javax.swing.JFrame {
         // TODO add your handling code here:
         String urlLogoI = txtUrlLogoIzq.getText().trim();
         String urlLogoD = txtUrlLogoDer.getText().trim();
+        String tituloLinea1 = txtTituloL1.getText().trim();
+        String tituloLinea2 = txtTituloL2.getText().trim();
+        String tituloLinea3 = txtTituloL3.getText().trim();
         String url = txtURL.getText().trim();
         String puerto = txtPuerto.getText().trim();
         String nombreDB = txtBaseDatos.getText().trim();
@@ -208,13 +274,15 @@ public class Configuracion extends javax.swing.JFrame {
             urlLogoD = "Vacio";
         }
 
-        if (urlLogoD.length() == 0 || urlLogoI.length() == 0 || url.length() == 0 || puerto.length() == 0 || nombreDB.length() == 0 || usuarioDB.length() == 0 || passDB.length() == 0) {
+        if (urlLogoD.length() == 0 || urlLogoI.length() == 0 || url.length() == 0 || puerto.length() == 0 || nombreDB.length() == 0 || usuarioDB.length() == 0 
+                || passDB.length() == 0) {
             JOptionPane.showMessageDialog(null, "Datos de configuración o datos de conexión a base de datos está incompleta", "ERROR",
                     JOptionPane.ERROR_MESSAGE);
         } else {
             Con_DB db = new Con_DB();
             if (db.probarConexion(url, puerto, nombreDB, usuarioDB, passDB)) {
-                String cadenaConf = url + "#&&#" + puerto + "#&&#" + nombreDB + "#&&#" + usuarioDB + "#&&#" + passDB + "#&&#" + urlLogoI + "#&&#" + urlLogoD;
+                String cadenaConf = url + "#&&#" + puerto + "#&&#" + nombreDB + "#&&#" + usuarioDB + "#&&#" + passDB + "#&&#" + urlLogoI + 
+                        "#&&#" + urlLogoD + "#&&#" + tituloLinea1 + "#&&#" + tituloLinea2 + "#&&#" + tituloLinea3;
 
                 String ruta = "";
                 File midir = new File(".");
@@ -331,6 +399,21 @@ public class Configuracion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRecargarConfigMouseClicked
 
+    private void txtTituloL1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloL1KeyReleased
+        this.mostrarPreview();
+        
+    }//GEN-LAST:event_txtTituloL1KeyReleased
+
+    private void txtTituloL2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloL2KeyReleased
+        // TODO add your handling code here:
+        this.mostrarPreview();
+    }//GEN-LAST:event_txtTituloL2KeyReleased
+
+    private void txtTituloL3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloL3KeyReleased
+        // TODO add your handling code here:
+        this.mostrarPreview();
+    }//GEN-LAST:event_txtTituloL3KeyReleased
+
     public static void mostrarLogIn() {
         LogIn f = new LogIn();
         int w = 400;
@@ -356,6 +439,10 @@ public class Configuracion extends javax.swing.JFrame {
     private void mostrarPreview(){
         String urlLogoI = txtUrlLogoIzq.getText();
         String urlLogoD = txtUrlLogoDer.getText();
+        
+        String tituloLinea1 = txtTituloL1.getText().trim();
+        String tituloLinea2 = txtTituloL2.getText().trim();
+        String tituloLinea3 = txtTituloL3.getText().trim();
 
         //https://lh3.googleusercontent.com/sCG99HG8o51kkOnYc0sLjWEtVkyE3UqN19qNhRCzM8xRNzLh5C6wrKefrbMMKrHAxnhu6nz3LAAUOpjshesSz9ZvVIkLWr5Q18cNU049uz5Saza6mJAfUQfYZ5ODmf62U1rIt54Ujg=w2400
         //http://lh3.googleusercontent.com/1vfHKJDGrMNsbsjRurXOpNtEzyez_Thp_pIHH7tTyFAilZaapN6Ca784rSRLyEsy5qmkJ8l9YedeqihjUpBB24nXSDm876vcZ-UyXqwoFtBvk4CPzs3HQ4tA_cFxsCnpiavNrOKLdw=w2400
@@ -368,7 +455,7 @@ public class Configuracion extends javax.swing.JFrame {
                 + "<img width=\"40\" alt=\"Logo_izq\" src=\"" + urlLogoI + "\"/>"
                 + "</td>"
                 + "<td style=\"text-align: center; font-size: 6px;\">"
-                + "<p><span style='font-size: 8px;'><b>ALCALDIA MUNICIPAL DEL DISTRITO CENTRAL</b></span><br><span style='font-size: 7px;'><b>GERENCIA DE RECURSOS HUMANOS</b></span><br><span style='font-size: 7px;'><b>DEPARTAMENTO DE PLANILLAS</b></span><br>Comprobante de Pago de MES" + " de AÑO" + "</p>"
+                + "<p><span style='font-size: 8px;'><b>" + tituloLinea1 + "</b></span><br><span style='font-size: 7px;'><b>" + tituloLinea2 + "</b></span><br><span style='font-size: 7px;'><b>" + tituloLinea3 + "</b></span><br>Comprobante de Pago de MES" + " de AÑO" + "</p>"
                 + "</td>"
                 + "<td style = \"text-align: right;\">"
                 + "<img width = \"40\" alt = \"Logo_der\" src=\"" + urlLogoD + "\"/>"
@@ -425,6 +512,10 @@ public class Configuracion extends javax.swing.JFrame {
     private javax.swing.JLabel btnRecargarConfig;
     private javax.swing.JButton btnSalirCnf;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -438,6 +529,9 @@ public class Configuracion extends javax.swing.JFrame {
     private javax.swing.JTextField txtBaseDatos;
     private javax.swing.JPasswordField txtPassDB;
     private javax.swing.JTextField txtPuerto;
+    private javax.swing.JTextField txtTituloL1;
+    private javax.swing.JTextField txtTituloL2;
+    private javax.swing.JTextField txtTituloL3;
     private javax.swing.JTextField txtURL;
     private javax.swing.JTextField txtUrlLogoDer;
     private javax.swing.JTextField txtUrlLogoIzq;
