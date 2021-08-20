@@ -45,7 +45,7 @@ public class ThreadProcesos extends Thread {
 
     private String urlLogoIzq;
     private String urlLogoDer;
-    
+
     private String tituloLinea_1;
     private String tituloLinea_2;
     private String tituloLinea_3;
@@ -143,10 +143,11 @@ public class ThreadProcesos extends Thread {
         String sql = "SELECT DISTINCT anio FROM planillas ORDER BY anio DESC";
         ResultSet RSanios = db.ejecutarSELECT(sql);
         cmbAnio.removeAllItems();
-
+        boolean hayAnios = false;
         try {
             while (RSanios.next()) {
                 cmbAnio.addItem(RSanios.getString("anio"));
+                hayAnios = true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -154,6 +155,24 @@ public class ThreadProcesos extends Thread {
         } finally {
 
         }
+
+        if (!hayAnios) {
+            String sql_ch = "SELECT DISTINCT anio FROM ch_planillas ORDER BY anio DESC";
+            ResultSet RSanios_ch = db.ejecutarSELECT(sql_ch);
+            cmbAnio.removeAllItems();
+
+            try {
+                while (RSanios_ch.next()) {
+                    cmbAnio.addItem(RSanios_ch.getString("anio"));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+
+            } finally {
+
+            }
+        }
+
         db.cierraConexion();
         llenarMeses();
     }
@@ -163,17 +182,36 @@ public class ThreadProcesos extends Thread {
         if (anio.length() > 0) {
             Con_DB db = new Con_DB();
             db.conectar();
+
             String sql = "SELECT DISTINCT mes FROM planillas WHERE anio = " + anio + " ORDER BY mes DESC";
             ResultSet RSmeses = db.ejecutarSELECT(sql);
             Principal.cmbMes.removeAllItems();
 
+            boolean hayMeses = false;
             try {
                 while (RSmeses.next()) {
                     Principal.cmbMes.addItem(this.mes2text(RSmeses.getString("mes")));
+                    hayMeses = true;
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+            if (!hayMeses) {
+                String sql_ch = "SELECT DISTINCT mes FROM ch_planillas WHERE anio = " + anio + " ORDER BY mes DESC";
+                ResultSet RSmeses_ch = db.ejecutarSELECT(sql_ch);
+                Principal.cmbMes.removeAllItems();
+
+                try {
+                    while (RSmeses_ch.next()) {
+                        Principal.cmbMes.addItem(this.mes2text(RSmeses_ch.getString("mes")));
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
             db.cierraConexion();
             if (Principal.chkAcuerdo.isSelected()) {
                 getCorreosDiponibles();
@@ -340,7 +378,7 @@ public class ThreadProcesos extends Thread {
         Principal.lblPlanillasEncontradasCH.setText("Planillas encontradas " + planillas);
 
         if (planillas > 0) {
-            if(contratosCorreoEnviados > contratosCorreosDisponibles){
+            if (contratosCorreoEnviados > contratosCorreosDisponibles) {
                 contratosCorreoEnviados = contratosCorreosDisponibles;
             }
             Principal.pbrEnviadosCH.setMaximum(contratosCorreosDisponibles);
@@ -506,6 +544,7 @@ public class ThreadProcesos extends Thread {
             String passwordMailRS = "";
             String asunto;
             String puerto = "";
+            String tls = "";
 
             String sqlCnfGral = "SELECT mensaje_voucher FROM cnf_general";
             String sqlCnfMail = "SELECT * FROM cnf_mail";
@@ -524,6 +563,12 @@ public class ThreadProcesos extends Thread {
                 userNameMailRS = rsCnfMail.getString("correo");
                 passwordMailRS = rsCnfMail.getString("pass");
                 puerto = rsCnfMail.getString("puerto");
+
+                if (rsCnfMail.getInt("aplicar_tls") == 1) {
+                    tls = "true";
+                } else {
+                    tls = "false";
+                }
             }
 
             final String userNameMail = userNameMailRS;
@@ -532,12 +577,13 @@ public class ThreadProcesos extends Thread {
             //Iniciar la conexión al servidor de correos
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.starttls.enable", tls);
             props.put("mail.smtp.host", smtpServer);
             props.put("mail.smtp.port", puerto);
 
             Session session = Session.getInstance(props,
                     new javax.mail.Authenticator() {
+                @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication(userNameMail, passwordMail);
                 }
@@ -620,15 +666,19 @@ public class ThreadProcesos extends Thread {
                                 + "<table border=\"0\" width=\"1\" cellspacing=\"1\" cellpadding=\"0\" style=\"width: 100%;\">"
                                 + "<tbody>"
                                 + "<tr>"
-                                + "<td>"
-                                + "<img width=\"40\" alt=\"escudo_hn2\" src=\"" + this.urlLogoIzq + "\"/>"
-                                + "</td>"
+                                + "<td>";
+                        if (this.urlLogoIzq.length() > 0) {
+                            voucher += "<img width=\"40\" alt=\"escudo_hn2\" src=\"" + this.urlLogoIzq + "\"/>";
+                        }
+                        voucher += "</td>"
                                 + "<td style=\"text-align: center; font-size: 12px;\">"
                                 + "<p><span style='font-size: 16px;'><b>" + this.tituloLinea_1 + "</b></span><br><span style='font-size: 13px;'><b>" + this.tituloLinea_2 + "</b></span><br><span style='font-size: 12px;'><b>" + this.tituloLinea_3 + "</b></span><br>Comprobante de Pago de " + mesSel + " de " + anio + "</p>"
                                 + "</td>"
-                                + "<td style = \"text-align: right;\">"
-                                + "<img width = \"40\" alt = \"Logo\" src=\"" + this.urlLogoDer + "\"/>"
-                                + "</td>"
+                                + "<td style = \"text-align: right;\">";
+                        if (this.urlLogoDer.length() > 0) {
+                            voucher += "<img width = \"40\" alt = \"Logo\" src=\"" + this.urlLogoDer + "\"/>";
+                        }
+                        voucher += "</td>"
                                 + "</tr>"
                                 + "</tbody>"
                                 + "</table>"
@@ -834,7 +884,6 @@ public class ThreadProcesos extends Thread {
                         Principal.txtVoucher.setText(voucher);
 
                         //enviar correo SMTP
-
                         //Recuperar configuración de conexion
                         asunto = codEmpleado + " Comprobante de Pago de " + mesSel + " de " + anio;
 
@@ -1075,6 +1124,7 @@ public class ThreadProcesos extends Thread {
             String passwordMailRS = "";
             String asunto;
             String puerto = "";
+            String tls = "";
 
             String sqlCnfGral = "SELECT mensaje_voucher FROM cnf_general";
             String sqlCnfMail = "SELECT * FROM cnf_mail";
@@ -1093,6 +1143,11 @@ public class ThreadProcesos extends Thread {
                 userNameMailRS = rsCnfMail.getString("correo");
                 passwordMailRS = rsCnfMail.getString("pass");
                 puerto = rsCnfMail.getString("puerto");
+                if (rsCnfMail.getInt("aplicar_tls") == 1) {
+                    tls = "true";
+                } else {
+                    tls = "false";
+                }
             }
 
             final String userNameMail = userNameMailRS;
@@ -1101,7 +1156,7 @@ public class ThreadProcesos extends Thread {
             //Iniciar la conexión al servidor de correos
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.starttls.enable", tls);
             props.put("mail.smtp.host", smtpServer);
             props.put("mail.smtp.port", puerto);
 
@@ -1217,15 +1272,19 @@ public class ThreadProcesos extends Thread {
                                     + "<table border=\"0\" width=\"1\" cellspacing=\"1\" cellpadding=\"0\" style=\"width: 100%;\">"
                                     + "<tbody>"
                                     + "<tr>"
-                                    + "<td>"
-                                    + "<img width=\"40\" alt=\"escudo_hn2\" src=\"" + urlLogoIzq + "\"/>"
-                                    + "</td>"
+                                    + "<td>";
+                            if (this.urlLogoIzq.length() > 0) {
+                                voucher += "<img width=\"40\" alt=\"escudo_hn2\" src=\"" + this.urlLogoIzq + "\"/>";
+                            }
+                            voucher += "</td>"
                                     + "<td style=\"text-align: center; font-size: 12px;\">"
                                     + "<p><span style='font-size: 16px;'><b>" + this.tituloLinea_1 + "</b></span><br><span style='font-size: 13px;'><b>" + this.tituloLinea_2 + "</b></span><br><span style='font-size: 12px;'><b>" + this.tituloLinea_3 + "</b></span><br>Comprobante de Pago de " + mesSel + " de " + anio + "</p>"
-                                    // + "<img width = \"0\" alt = \"\" src=\"" + urlLogoDer + "\"/></td>"
-                                    + "<td style = \"text-align: right;\">"
-                                    + "<img width = \"40\" alt = \"Logo\" src=\"" + urlLogoDer + "\"/>"
                                     + "</td>"
+                                    + "<td style = \"text-align: right;\">";
+                            if (this.urlLogoDer.length() > 0) {
+                                voucher += "<img width = \"40\" alt = \"Logo\" src=\"" + this.urlLogoDer + "\"/>";
+                            }
+                            voucher += "</td>"
                                     + "</tr>"
                                     + "</tbody>"
                                     + "</table>"
@@ -1368,7 +1427,7 @@ public class ThreadProcesos extends Thread {
                                 Principal.pbrEnviadosCH.setValue((int) contratosCorreoEnviados);
                                 Principal.pbrEnviosCiclo.setValue((int) enviadosPorCiclo);
 
-                                double porcentaje = (contratosCorreoEnviados / (int) contratosCorreosDisponibles) * 100;
+                                double porcentaje = ((int) contratosCorreoEnviados / (int) contratosCorreosDisponibles) * 100;
 
                                 String porcentajeTxt = format.format(porcentaje);
                                 Principal.pbrEnviadosCH.setToolTipText(porcentajeTxt + " %");
@@ -1382,7 +1441,7 @@ public class ThreadProcesos extends Thread {
                                     errorEnvio = true;
                                 }
                                 Principal.lblEstado.setText("ERROR: " + e.getMessage());
-                                TimeUnit.SECONDS.sleep(5);
+                                TimeUnit.SECONDS.sleep(15);
 //                            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR",
 //                                    JOptionPane.ERROR_MESSAGE);
                                 //throw new RuntimeException(e);

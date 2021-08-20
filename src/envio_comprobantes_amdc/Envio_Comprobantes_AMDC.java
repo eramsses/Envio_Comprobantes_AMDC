@@ -28,13 +28,13 @@ public class Envio_Comprobantes_AMDC {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-            mostrarSplash();
+
+        mostrarSplash();
 //              mostrarLogIn();
-            
+
     }
-    
-     public static void mostrarSplash() {
+
+    public static void mostrarSplash() {
         Splash f = new Splash();
         int w = 700;
         int h = 610;
@@ -42,7 +42,7 @@ public class Envio_Comprobantes_AMDC {
         f.setMaximumSize(new Dimension(w, h));
         f.setResizable(false);
         f.setTitle("Iniciando...");
-        
+
         //obtener el tamaño de la pantalla
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -64,12 +64,12 @@ public class Envio_Comprobantes_AMDC {
         f.setVisible(true);
         Splash.llenarBarra();
         esperar(300);
-        
+
         f.dispose();
-        
+
     }
-     
-     private static void esperar(long milisegundos) {
+
+    private static void esperar(long milisegundos) {
         try {
             Thread.sleep(milisegundos);
         } catch (InterruptedException e) {
@@ -139,17 +139,17 @@ public class Envio_Comprobantes_AMDC {
 
         String rutaArchivo = ruta + "\\src\\configuraciones\\config_DB.cnf";
         File cnf = new File(rutaArchivo);
-        
+
         String rutaCarpeta = ruta + "\\src\\configuraciones";
-        
+
         File carpeta = new File(rutaCarpeta);
-        
+
         //Validar que la carpeta existe sino crearla
-        if(!carpeta.exists()){
+        if (!carpeta.exists()) {
             carpeta.mkdirs();
             return false;
         }
-        
+
         //Validar que el archivo existe
         if (!cnf.exists()) {
             return false;
@@ -175,10 +175,10 @@ public class Envio_Comprobantes_AMDC {
             Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if(textoCifrado.length() == 0){
+        if (textoCifrado.length() == 0) {
             return false;
         }
-        
+
         TripleDes tDES = new TripleDes();
         if (!tDES.validar_txt_3DES(textoCifrado)) {
             return false;
@@ -191,8 +191,6 @@ public class Envio_Comprobantes_AMDC {
         if (datos.length < 5) {
             return false;
         }
-
-        
 
         return true;
     }

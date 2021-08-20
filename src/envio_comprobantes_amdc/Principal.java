@@ -55,7 +55,7 @@ public class Principal extends javax.swing.JFrame {
         SpinnerNumberModel nm2 = new SpinnerNumberModel();
         nm2.setMaximum(120);
         nm2.setMinimum(1);
-        nm2.setValue(70);
+        nm2.setValue(65);
 
         valMaxCorreos.setModel(nm1);
         tiempoEspera.setModel(nm2);
@@ -632,7 +632,7 @@ public class Principal extends javax.swing.JFrame {
         lblTitulo.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(102, 102, 102));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Envío Automático de Comprobantes de Pago A.M.D.C.");
+        lblTitulo.setText("Envío Automático de Comprobantes de Pago");
         pnlEnvios.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 890, -1));
 
         grupoEnvios.setBackground(new java.awt.Color(249, 249, 249));
