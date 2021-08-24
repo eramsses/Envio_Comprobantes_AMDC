@@ -115,6 +115,8 @@ public class ThreadProcesos extends Thread {
                     //System.out.println(texto);
                     textoCifrado = textoCifrado + texto;
                 }
+                
+                fr.close();
 
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
@@ -921,7 +923,7 @@ public class ThreadProcesos extends Thread {
                                 errorEnvio = true;
                             }
                             Principal.lblEstado.setText("ERROR: " + e.getMessage());
-                            TimeUnit.SECONDS.sleep(5);
+                            TimeUnit.SECONDS.sleep(15);
 //                            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR",
 //                                    JOptionPane.ERROR_MESSAGE);
                             //throw new RuntimeException(e);

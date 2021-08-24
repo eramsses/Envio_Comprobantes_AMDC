@@ -40,7 +40,16 @@ public class LogIn extends javax.swing.JFrame {
         LogIn.this.setOpacity(0.94f);
 
         lblLogin.setBackground(new Color(0, 0, 0, 0.94f));
-        if (txtPass.getText().equals("Contraseña")) {
+        
+        char[] pass_array = txtPass.getPassword();
+        
+        String pass = "";
+        
+        for(int i = 0; i < pass_array.length; i++){
+            pass += pass_array[i];
+        }
+        
+        if (pass.equals("Contraseña")) {
             txtPass.setEchoChar((char) 0);
         }
 
@@ -171,30 +180,29 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         String user = txtUsu.getText();
-        String passV = txtPass.getText();
-        char passR[] = txtPass.getPassword();
+        
+        char[] pass_array = txtPass.getPassword();
+        
+        String pass = "";
+        
+        for(int i = 0; i < pass_array.length; i++){
+            pass += pass_array[i];
+        }
         
         if(txtUsu.getText().equals("Usuario")){
             user = "";
         }
         
-        if(passV.equals("Contraseña")){
-            passV = "";
+        if(pass.equals("Contraseña")){
+            pass = "";
         }
 
-        if (user.length() == 0 || passR.length == 0 || passV.length() == 0) {
+        if (user.length() == 0 || pass.length() == 0) {
             JOptionPane.showMessageDialog(null, "Credenciales para iniciar sesión incompletas", "ERROR",
                     JOptionPane.ERROR_MESSAGE);
         } else {
 
             MD5 md5 = new MD5();
-
-            String pass = "";
-
-            for (int i = 0; i < passR.length; i++) {
-                pass += passR[i];
-            }
-            passR = null;
 
             String passMd5 = md5.obtenerHashMD5(pass);
 
@@ -267,7 +275,14 @@ public class LogIn extends javax.swing.JFrame {
 
     private void txtPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassFocusGained
         // TODO add your handling code here:
-        String pass = txtPass.getText().trim();
+        char[] pass_array = txtPass.getPassword();
+        
+        String pass = "";
+        
+        for(int i = 0; i < pass_array.length; i++){
+            pass += pass_array[i];
+        }
+        
         if (pass.equals("Contraseña")) {
             txtPass.setText("");
             txtPass.setEchoChar('*');
@@ -277,7 +292,14 @@ public class LogIn extends javax.swing.JFrame {
 
     private void txtPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassFocusLost
         // TODO add your handling code here:
-        String pass = txtPass.getText().trim();
+        char[] pass_array = txtPass.getPassword();
+        
+        String pass = "";
+        
+        for(int i = 0; i < pass_array.length; i++){
+            pass += pass_array[i];
+        }
+        
         if (pass.length() == 0) {
             txtPass.setText("Contraseña");
             txtPass.setForeground(new java.awt.Color(153, 153, 153));

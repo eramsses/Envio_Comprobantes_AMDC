@@ -184,7 +184,13 @@ public class ConfiguracionInterna extends javax.swing.JDialog {
         String puertoDB = txtPuerto.getText().trim();
         String nombreDB = txtBaseDatos.getText().trim();
         String usuarioDB = txtUsuarioDB.getText().trim();
-        String passDB = txtPassDB.getText().trim();
+        char[] passDB_array = txtPassDB.getPassword();
+        
+        String passDB = "";
+        
+        for(int i = 0; i < passDB_array.length; i++){
+            passDB += passDB_array[i];
+        }
 
         if (db.probarConexion(urlDB, puertoDB, nombreDB, usuarioDB, passDB)) {
             JOptionPane.showMessageDialog(null, "Conexión Exitosa!!!:", "PRUEBA DE CONEXIÓN",
@@ -215,7 +221,13 @@ public class ConfiguracionInterna extends javax.swing.JDialog {
         String puerto = txtPuerto.getText().trim();
         String nombreDB = txtBaseDatos.getText().trim();
         String usuarioDB = txtUsuarioDB.getText().trim();
-        String passDB = txtPassDB.getText().trim();
+        char[] passDB_array = txtPassDB.getPassword();
+        
+        String passDB = "";
+        
+        for(int i = 0; i < passDB_array.length; i++){
+            passDB += passDB_array[i];
+        }
         
         if(urlLogoI.length() == 0){
             urlLogoI = "Vacio";
@@ -351,6 +363,8 @@ public class ConfiguracionInterna extends javax.swing.JDialog {
                     //System.out.println(texto);
                     textoCifrado = textoCifrado + texto;
                 }
+                
+                fr.close();
 
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);

@@ -109,6 +109,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         btnContraer = new javax.swing.JLabel();
+        lblVersionTitulo = new javax.swing.JLabel();
         pnlEstado = new javax.swing.JPanel();
         pbrEnviosCiclo = new javax.swing.JProgressBar();
         lblEstado = new javax.swing.JLabel();
@@ -265,6 +266,11 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        lblVersionTitulo.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        lblVersionTitulo.setForeground(new java.awt.Color(190, 190, 190));
+        lblVersionTitulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblVersionTitulo.setText("4.0.8");
+
         javax.swing.GroupLayout barraTituloLayout = new javax.swing.GroupLayout(barraTitulo);
         barraTitulo.setLayout(barraTituloLayout);
         barraTituloLayout.setHorizontalGroup(
@@ -273,7 +279,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnContraer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12)
-                .addGap(313, 313, 313)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblVersionTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(238, 238, 238)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCerrar)
@@ -285,7 +293,9 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnContraer)
                     .addGroup(barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblVersionTitulo))
                         .addGroup(barraTituloLayout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -750,7 +760,7 @@ public class Principal extends javax.swing.JFrame {
         lblVerAbout.setForeground(new java.awt.Color(153, 153, 153));
         lblVerAbout.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblVerAbout.setText("Versión 4.0.1");
-        pnlAcercaDe.add(lblVerAbout, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 210, 170, -1));
+        pnlAcercaDe.add(lblVerAbout, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 170, -1));
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Acerca_de_gen.png"))); // NOI18N
@@ -1430,12 +1440,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUrlLogoDerKeyTyped
 
     private void btnRecargarConfigInternaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRecargarConfigInternaMouseClicked
-        // TODO add your handling code here:
-        String li = "https://lh3.googleusercontent.com/sCG99HG8o51kkOnYc0sLjWEtVkyE3UqN19qNhRCzM8xRNzLh5C6wrKefrbMMKrHAxnhu6nz3LAAUOpjshesSz9ZvVIkLWr5Q18cNU049uz5Saza6mJAfUQfYZ5ODmf62U1rIt54Ujg=w2400";
-        String ld = "http://lh3.googleusercontent.com/1vfHKJDGrMNsbsjRurXOpNtEzyez_Thp_pIHH7tTyFAilZaapN6Ca784rSRLyEsy5qmkJ8l9YedeqihjUpBB24nXSDm876vcZ-UyXqwoFtBvk4CPzs3HQ4tA_cFxsCnpiavNrOKLdw=w2400";
-
-        this.txtUrlLogoIzq.setText(li);
-        this.txtUrlLogoDer.setText(ld);
+        
+        this.txtUrlLogoIzq.setText(this.getLogoIzquierdo());
+        this.txtUrlLogoDer.setText(this.getLogoDerecho());
 
         this.mostrarPreview();
 
@@ -1540,7 +1547,13 @@ public class Principal extends javax.swing.JFrame {
         String puertoDB = txtPuerto.getText().trim();
         String nombreDB = txtBaseDatos.getText().trim();
         String usuarioDB = txtUsuarioDB.getText().trim();
-        String passDB = txtPassDB.getText().trim();
+        char[] passDB_array = txtPassDB.getPassword();
+        
+        String passDB = "";
+        
+        for(int i = 0; i < passDB_array.length; i++){
+            passDB += passDB_array[i];
+        }
 
         if (db.probarConexion(urlDB, puertoDB, nombreDB, usuarioDB, passDB)) {
             JOptionPane.showMessageDialog(null, "Conexión Exitosa!!!:", "PRUEBA DE CONEXIÓN",
@@ -1699,8 +1712,7 @@ public class Principal extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Error al guardar configuración:\n" + e.getMessage(), "ERROR",
                             JOptionPane.ERROR_MESSAGE);
                 }
-        } //else {
-
+        } 
             
             FileReader fr;
             String texto;
@@ -1714,6 +1726,8 @@ public class Principal extends javax.swing.JFrame {
                     //System.out.println(texto);
                     txtVersion = txtVersion + texto;
                 }
+                
+                fr.close();
 
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
@@ -1721,13 +1735,135 @@ public class Principal extends javax.swing.JFrame {
                 Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        //}
-        
+        Splash.lblVerSplash.setText("Versión " + txtVersion);
         lblVer1.setText(txtVersion);
-        lblVerAbout.setText(txtVersion);
-        Splash.lblVerSplash.setText(txtVersion);
+        lblVerAbout.setText("Versión " + txtVersion);
+        lblVersionTitulo.setText(txtVersion);
+        
 
     }
+    
+    private String getLogoIzquierdo() {
+        String ruta = "";
+        File midir = new File(".");
+        try {
+            ruta = midir.getCanonicalPath();
+
+        } catch (IOException e) {
+        }
+
+        String rutaArchivo = ruta + "\\src\\configuraciones\\Logo_i.cnf";
+        File cnf = new File(rutaArchivo);
+        //Validar que el archivo existe
+        if (!cnf.exists()) {
+            try {
+                cnf.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            String urlLogo = "https://i.ibb.co/QQ7LCKy/escudo-hn.png";
+            FileWriter fw;
+
+            try {
+
+                fw = new FileWriter(cnf);
+                try (BufferedWriter bw = new BufferedWriter(fw)) {
+                    PrintWriter salida = new PrintWriter(bw);
+                    salida.write(urlLogo);
+
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al guardar configuración:\n" + e.getMessage(), "ERROR",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        //validar que contiene parametros guardados
+        FileReader fr;
+        String texto = "";
+        String textoLeido = "";
+        try {
+            fr = new FileReader(rutaArchivo);
+
+            BufferedReader br = new BufferedReader(fr);
+
+            while ((texto = br.readLine()) != null) {
+                    textoLeido = textoLeido + texto;
+            }
+            
+            fr.close();
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return textoLeido;
+    }
+    
+    private String getLogoDerecho() {
+        String ruta = "";
+        File midir = new File(".");
+        try {
+            ruta = midir.getCanonicalPath();
+
+        } catch (IOException e) {
+        }
+
+        String rutaArchivo = ruta + "\\src\\configuraciones\\Logo_d.cnf";
+        File cnf = new File(rutaArchivo);
+        //Validar que el archivo existe
+        if (!cnf.exists()) {
+            try {
+                cnf.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            String urlLogo = "https://i.ibb.co/dP3QM4N/logo-amdc.png";
+            FileWriter fw;
+
+            try {
+
+                fw = new FileWriter(cnf);
+                try (BufferedWriter bw = new BufferedWriter(fw)) {
+                    PrintWriter salida = new PrintWriter(bw);
+                    salida.write(urlLogo);
+
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al guardar configuración:\n" + e.getMessage(), "ERROR",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        //validar que contiene parametros guardados
+        FileReader fr;
+        String texto = "";
+        String textoLeido = "";
+        try {
+            fr = new FileReader(rutaArchivo);
+
+            BufferedReader br = new BufferedReader(fr);
+
+            while ((texto = br.readLine()) != null) {
+                //System.out.println(texto);
+                textoLeido = textoLeido + texto;
+            }
+            
+            fr.close();
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return textoLeido;
+    }
+
 
     private void guardarConfiguracion() {
         // TODO add your handling code here:
@@ -1740,7 +1876,13 @@ public class Principal extends javax.swing.JFrame {
         String puerto = txtPuerto.getText().trim();
         String nombreDB = txtBaseDatos.getText().trim();
         String usuarioDB = txtUsuarioDB.getText().trim();
-        String passDB = txtPassDB.getText().trim();
+        char[] passDB_array = txtPassDB.getPassword();
+        
+        String passDB = "";
+        
+        for(int i = 0; i < passDB_array.length; i++){
+            passDB += passDB_array[i];
+        }
 
         if (urlLogoI.length() == 0) {
             urlLogoI = "Vacio";
@@ -1976,23 +2118,23 @@ public class Principal extends javax.swing.JFrame {
                     //System.out.println(texto);
                     textoCifrado = textoCifrado + texto;
                 }
-
+                
+                fr.close();
+                
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            
 
             TripleDes tDES = new TripleDes();
 
             String txtDecifrado = tDES.desEncriptar_txt_3DES(textoCifrado);
 
-//            System.out.println(txtDecifrado);
             String datos[] = txtDecifrado.split("#&&#");
 
-//            for (String dato : datos) {
-//                System.out.println(dato);
-//            }
             jTxtPane_logos.setContentType("text/html");
             this.txtURL.setText(datos[0]);
             this.txtPuerto.setText(datos[1]);
@@ -2136,6 +2278,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblVer1;
     private javax.swing.JLabel lblVerAbout;
+    private javax.swing.JLabel lblVersionTitulo;
     private javax.swing.JPanel luzCnf_DB;
     private javax.swing.JPanel luzCnf_correos;
     private javax.swing.JPanel luzCnf_logos;

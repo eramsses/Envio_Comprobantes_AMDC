@@ -10,11 +10,15 @@ package envio_comprobantes_amdc;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -31,20 +35,15 @@ public class Configuracion extends javax.swing.JFrame {
      */
     public Configuracion() {
         initComponents();
-        
-        
-        
+
         jTxtPane_logo_izq.setContentType("text/html");
 
         btnGuardarDB.setIcon(new ImageIcon("src/imagenes/diskette_save_saveas_1514.png"));
         btnProbarDB.setIcon(new ImageIcon("src/imagenes/probar_db.png"));
         btnSalirCnf.setIcon(new ImageIcon("src/imagenes/salir-de-mi-perfil-icono-3964-32.png"));
-        
-        
 
         //txtUrlLogoIzq.setText("https://lh3.googleusercontent.com/sCG99HG8o51kkOnYc0sLjWEtVkyE3UqN19qNhRCzM8xRNzLh5C6wrKefrbMMKrHAxnhu6nz3LAAUOpjshesSz9ZvVIkLWr5Q18cNU049uz5Saza6mJAfUQfYZ5ODmf62U1rIt54Ujg=w2400");
         //txtUrlLogoDer.setText("http://lh3.googleusercontent.com/1vfHKJDGrMNsbsjRurXOpNtEzyez_Thp_pIHH7tTyFAilZaapN6Ca784rSRLyEsy5qmkJ8l9YedeqihjUpBB24nXSDm876vcZ-UyXqwoFtBvk4CPzs3HQ4tA_cFxsCnpiavNrOKLdw=w2400");
-        
         this.mostrarPreview();
     }
 
@@ -137,7 +136,7 @@ public class Configuracion extends javax.swing.JFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, -1, -1));
         getContentPane().add(txtPassDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, 470, -1));
 
-        btnGuardarDB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_save_38px.png"))); // NOI18N
+        btnGuardarDB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/diskette_save_saveas_1514.png"))); // NOI18N
         btnGuardarDB.setText("Guardar");
         btnGuardarDB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,24 +264,32 @@ public class Configuracion extends javax.swing.JFrame {
         String puerto = txtPuerto.getText().trim();
         String nombreDB = txtBaseDatos.getText().trim();
         String usuarioDB = txtUsuarioDB.getText().trim();
-        String passDB = txtPassDB.getText().trim();
-        
-        if(urlLogoI.length() == 0){
+        char[] passDB_array = txtPassDB.getPassword();
+
+        String passDB = "";
+
+        for (int i = 0; i < passDB_array.length; i++) {
+            passDB += passDB_array[i];
+        }
+
+        System.out.println(passDB);
+
+        if (urlLogoI.length() == 0) {
             urlLogoI = "Vacio";
         }
-        if(urlLogoD.length() == 0){
+        if (urlLogoD.length() == 0) {
             urlLogoD = "Vacio";
         }
 
-        if (urlLogoD.length() == 0 || urlLogoI.length() == 0 || url.length() == 0 || puerto.length() == 0 || nombreDB.length() == 0 || usuarioDB.length() == 0 
+        if (urlLogoD.length() == 0 || urlLogoI.length() == 0 || url.length() == 0 || puerto.length() == 0 || nombreDB.length() == 0 || usuarioDB.length() == 0
                 || passDB.length() == 0) {
             JOptionPane.showMessageDialog(null, "Datos de configuración o datos de conexión a base de datos está incompleta", "ERROR",
                     JOptionPane.ERROR_MESSAGE);
         } else {
             Con_DB db = new Con_DB();
             if (db.probarConexion(url, puerto, nombreDB, usuarioDB, passDB)) {
-                String cadenaConf = url + "#&&#" + puerto + "#&&#" + nombreDB + "#&&#" + usuarioDB + "#&&#" + passDB + "#&&#" + urlLogoI + 
-                        "#&&#" + urlLogoD + "#&&#" + tituloLinea1 + "#&&#" + tituloLinea2 + "#&&#" + tituloLinea3;
+                String cadenaConf = url + "#&&#" + puerto + "#&&#" + nombreDB + "#&&#" + usuarioDB + "#&&#" + passDB + "#&&#" + urlLogoI
+                        + "#&&#" + urlLogoD + "#&&#" + tituloLinea1 + "#&&#" + tituloLinea2 + "#&&#" + tituloLinea3;
 
                 String ruta = "";
                 File midir = new File(".");
@@ -298,8 +305,8 @@ public class Configuracion extends javax.swing.JFrame {
 
                 String rutaArchivo = ruta + "\\src\\configuraciones\\config_DB.cnf";
                 File cnf = new File(rutaArchivo);
-                
-                if(!cnf.exists()){
+
+                if (!cnf.exists()) {
                     try {
                         cnf.createNewFile();
                     } catch (IOException ex) {
@@ -321,7 +328,7 @@ public class Configuracion extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Error al guardar configuración:\n" + e.getMessage(), "ERROR",
                             JOptionPane.ERROR_MESSAGE);
                 }
-                
+
                 mostrarLogIn();
                 this.dispose();
             }
@@ -341,7 +348,13 @@ public class Configuracion extends javax.swing.JFrame {
         String puertoDB = txtPuerto.getText().trim();
         String nombreDB = txtBaseDatos.getText().trim();
         String usuarioDB = txtUsuarioDB.getText().trim();
-        String passDB = txtPassDB.getText().trim();
+        char[] passDB_array = txtPassDB.getPassword();
+
+        String passDB = "";
+
+        for (int i = 0; i < passDB_array.length; i++) {
+            passDB += passDB_array[i];
+        }
 
         if (db.probarConexion(urlDB, puertoDB, nombreDB, usuarioDB, passDB)) {
             JOptionPane.showMessageDialog(null, "Conexión Exitosa!!!:", "PRUEBA DE CONEXIÓN",
@@ -388,12 +401,9 @@ public class Configuracion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUrlLogoDerKeyTyped
 
     private void btnRecargarConfigMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRecargarConfigMouseClicked
-        // TODO add your handling code here:
-        String li = "https://lh3.googleusercontent.com/sCG99HG8o51kkOnYc0sLjWEtVkyE3UqN19qNhRCzM8xRNzLh5C6wrKefrbMMKrHAxnhu6nz3LAAUOpjshesSz9ZvVIkLWr5Q18cNU049uz5Saza6mJAfUQfYZ5ODmf62U1rIt54Ujg=w2400";
-        String ld = "http://lh3.googleusercontent.com/1vfHKJDGrMNsbsjRurXOpNtEzyez_Thp_pIHH7tTyFAilZaapN6Ca784rSRLyEsy5qmkJ8l9YedeqihjUpBB24nXSDm876vcZ-UyXqwoFtBvk4CPzs3HQ4tA_cFxsCnpiavNrOKLdw=w2400";
-
-        this.txtUrlLogoIzq.setText(li);
-        this.txtUrlLogoDer.setText(ld);
+        
+        this.txtUrlLogoIzq.setText(this.getLogoIzquierdo());
+        this.txtUrlLogoDer.setText(this.getLogoDerecho());
 
         this.mostrarPreview();
 
@@ -401,7 +411,7 @@ public class Configuracion extends javax.swing.JFrame {
 
     private void txtTituloL1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloL1KeyReleased
         this.mostrarPreview();
-        
+
     }//GEN-LAST:event_txtTituloL1KeyReleased
 
     private void txtTituloL2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloL2KeyReleased
@@ -435,17 +445,136 @@ public class Configuracion extends javax.swing.JFrame {
 
         f.setVisible(true);
     }
+
+    private String getLogoIzquierdo() {
+        String ruta = "";
+        File midir = new File(".");
+        try {
+            ruta = midir.getCanonicalPath();
+
+        } catch (IOException e) {
+        }
+
+        String rutaArchivo = ruta + "\\src\\configuraciones\\Logo_i.cnf";
+        File cnf = new File(rutaArchivo);
+        //Validar que el archivo existe
+        if (!cnf.exists()) {
+            try {
+                cnf.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            String urlLogo = "https://i.ibb.co/QQ7LCKy/escudo-hn.png";
+            FileWriter fw;
+
+            try {
+
+                fw = new FileWriter(cnf);
+                try (BufferedWriter bw = new BufferedWriter(fw)) {
+                    PrintWriter salida = new PrintWriter(bw);
+                    salida.write(urlLogo);
+
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al guardar configuración:\n" + e.getMessage(), "ERROR",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        //validar que contiene parametros guardados
+        FileReader fr;
+        String texto = "";
+        String textoLeido = "";
+        try {
+            fr = new FileReader(rutaArchivo);
+
+            BufferedReader br = new BufferedReader(fr);
+
+            while ((texto = br.readLine()) != null) {
+                    textoLeido = textoLeido + texto;
+            }
+            
+            fr.close();
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return textoLeido;
+    }
     
-    private void mostrarPreview(){
+    private String getLogoDerecho() {
+        String ruta = "";
+        File midir = new File(".");
+        try {
+            ruta = midir.getCanonicalPath();
+
+        } catch (IOException e) {
+        }
+
+        String rutaArchivo = ruta + "\\src\\configuraciones\\Logo_d.cnf";
+        File cnf = new File(rutaArchivo);
+        //Validar que el archivo existe
+        if (!cnf.exists()) {
+            try {
+                cnf.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            String urlLogo = "https://i.ibb.co/dP3QM4N/logo-amdc.png";
+            FileWriter fw;
+
+            try {
+
+                fw = new FileWriter(cnf);
+                try (BufferedWriter bw = new BufferedWriter(fw)) {
+                    PrintWriter salida = new PrintWriter(bw);
+                    salida.write(urlLogo);
+
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al guardar configuración:\n" + e.getMessage(), "ERROR",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        //validar que contiene parametros guardados
+        FileReader fr;
+        String texto = "";
+        String textoLeido = "";
+        try {
+            fr = new FileReader(rutaArchivo);
+
+            BufferedReader br = new BufferedReader(fr);
+
+            while ((texto = br.readLine()) != null) {
+                //System.out.println(texto);
+                textoLeido = textoLeido + texto;
+            }
+            
+            fr.close();
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return textoLeido;
+    }
+
+    private void mostrarPreview() {
         String urlLogoI = txtUrlLogoIzq.getText();
         String urlLogoD = txtUrlLogoDer.getText();
-        
+
         String tituloLinea1 = txtTituloL1.getText().trim();
         String tituloLinea2 = txtTituloL2.getText().trim();
         String tituloLinea3 = txtTituloL3.getText().trim();
 
-        //https://lh3.googleusercontent.com/sCG99HG8o51kkOnYc0sLjWEtVkyE3UqN19qNhRCzM8xRNzLh5C6wrKefrbMMKrHAxnhu6nz3LAAUOpjshesSz9ZvVIkLWr5Q18cNU049uz5Saza6mJAfUQfYZ5ODmf62U1rIt54Ujg=w2400
-        //http://lh3.googleusercontent.com/1vfHKJDGrMNsbsjRurXOpNtEzyez_Thp_pIHH7tTyFAilZaapN6Ca784rSRLyEsy5qmkJ8l9YedeqihjUpBB24nXSDm876vcZ-UyXqwoFtBvk4CPzs3HQ4tA_cFxsCnpiavNrOKLdw=w2400
         String voucher_demo = "<html><head></head><body><div style=\"margin-top: 0px; font-family: arial; font-size: 8px;\">"
                 + "<div>"
                 + "<table border=\"0\" width=\"1\" cellspacing=\"1\" cellpadding=\"0\" style=\"width: 100%;\">"

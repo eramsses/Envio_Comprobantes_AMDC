@@ -189,8 +189,7 @@ public class Splash extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Error al guardar configuración:\n" + e.getMessage(), "ERROR",
                             JOptionPane.ERROR_MESSAGE);
                 }
-        } //else {
-
+        } 
             
             FileReader fr;
             String texto;
@@ -210,10 +209,8 @@ public class Splash extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(Envio_Comprobantes_AMDC.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        //}
         
-        lblVerSplash.setText(txtVersion);
+        Splash.lblVerSplash.setText("Versión " + txtVersion);
 
     }
 
