@@ -21,7 +21,7 @@ class Con_DB {
      * La conexion con la base de datos
      */
     Connection conexion;
-    public final String CONTROLADOR_JDBC = "com.mysql.jdbc.Driver"; //Para la conexion 
+    public final String CONTROLADOR_JDBC = "com.mysql.cj.jdbc.Driver"; //Para la conexion 
 
     public Con_DB() {
 
